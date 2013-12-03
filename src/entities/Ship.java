@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package entities;
 
 import gameobjects.Entity;
@@ -25,7 +19,13 @@ public class Ship extends Entity {
     private boolean dir = true;
     private int damage = 20;
     private float starting_x, moveDistance;
-     
+    
+    /**
+     * Construct a new enemy ship
+     * @param start_x
+     * @param start_y
+     * @throws SlickException
+     */
     public Ship(float start_x, float start_y) throws SlickException {
         super(start_x, start_y, 25, 25, "res/enemy-1-32.png");
         speed = 0.03f;
@@ -33,7 +33,10 @@ public class Ship extends Entity {
         starting_x = start_x;
         moveDistance = 20;
     }
-
+    
+    /**
+     * Update the ship
+     */
     @Override
     public void update(GameContainer container, float delta) {
         if(y > container.getHeight() + height) {

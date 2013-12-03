@@ -11,6 +11,10 @@ import entities.Player;
 import entities.Ship;
 import pickups.Health;
 
+/**
+ * Holds information about a wave
+ * @author Craig
+ */
 public class Wave extends GameManager {
 	
 	public boolean finished = false;
@@ -23,6 +27,12 @@ public class Wave extends GameManager {
 	
 	private Player p;
 	
+	/**
+	 * Construct a new Wave
+	 * @param diffMod
+	 * @param player
+	 * @throws SlickException
+	 */
 	public Wave(float diffMod, Player player) throws SlickException {
 		initialNumEnemies *= diffMod;
 		initialNumPickups *= diffMod;
@@ -31,6 +41,10 @@ public class Wave extends GameManager {
 		initialisePickupList();
 	}
 	
+	/**
+	 * Generate enemy list
+	 * @throws SlickException
+	 */
 	private void initialiseEnemyList() throws SlickException {
 		enemies = new ArrayList<Entity>();
 		for(int i = 0; i < initialNumEnemies; i++) {
@@ -38,6 +52,10 @@ public class Wave extends GameManager {
 		}
 	}
 	
+	/**
+	 * Generate pickup list
+	 * @throws SlickException
+	 */
 	private void initialisePickupList() throws SlickException {
 		pickups = new ArrayList<Pickup>();
 		for(int i = 0; i < initialNumPickups; i++) {
@@ -45,6 +63,9 @@ public class Wave extends GameManager {
 		}
 	}
 	
+	/**
+	 * Update everything on the wave
+	 */
 	public void update(GameContainer container, float delta, Player p) throws SlickException {
 		this.p = p;
 		dead = new ArrayList<Entity>();
@@ -59,7 +80,6 @@ public class Wave extends GameManager {
 		
 		collected = new ArrayList<Pickup>();
 		for(Pickup pup : pickups) {
-			System.out.println(pup.getY());
 			pup.listenForCollisions(p);
 			pup.update(container, delta);
 			if(!pup.visible) {
@@ -73,6 +93,9 @@ public class Wave extends GameManager {
 		}
 	}
 
+	/**
+	 * Render the enemies and pickups
+	 */
 	public void render(Graphics g) {
 		for(Entity e : enemies) {
 			e.render(g);

@@ -21,25 +21,34 @@ import gameobjects.Drawable;
 import gameobjects.Weapon;
 
 /**
- *
+ * Well we need a weapon don't we?
  * @author craig
  */
 public class RocketLauncher extends Weapon {
     
-
+	/**
+	 * Construct a rocket launcher, oooo that sounds fun!
+	 * @param p
+	 * @param name
+	 */
     public RocketLauncher(Player p, String name) {
         super(name);
         width = 10;
         height = 20;
     }
     
+    /**
+     * Fire it!! (Bored of documenting, can you tell?)
+     */
     public void fire() throws SlickException {
         bullets.add(new Rocket(x, y, -0.5f));
     }
     
+    /**
+     * Render the awesomenesss..... oh wait this might be in the player image,
+     * oh well, render the bullets then...
+     */
     public void render(Graphics g) {
-        //g.setColor(new Color(200, 200, 200));
-        //g.fillRect(x - (width / 2), y, width, height);
         for(Collidable rocket : bullets) {
             if(((Drawable)rocket).visible) {
                 ((Drawable)rocket).render(g);
@@ -47,6 +56,9 @@ public class RocketLauncher extends Weapon {
         }
     }
     
+    /**
+     * Update the weapon
+     */
     public void update(Player p, GameContainer con, float delta) throws SlickException {
         x = p.getX() + p.getWidth() / 2;
         y = p.getY();

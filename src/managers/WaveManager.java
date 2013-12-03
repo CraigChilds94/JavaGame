@@ -12,12 +12,23 @@ import gameobjects.GameManager;
 import gameobjects.GameState;
 import gameobjects.Wave;
 
+/**
+ * Manage the waves
+ * @author Craig
+ *
+ */
 public class WaveManager extends GameManager {
 	
 	public static int waveNumber = 0, numWaves = 0;
 	private ArrayList<Wave> waves;
 	private Player player;
 	
+	/**
+	 * Construct a new Wave Manager
+	 * @param p Is the player 
+	 * @param num The number of waves
+	 * @throws SlickException
+	 */
 	public WaveManager(Player p, int num) throws SlickException {
 		waves = new ArrayList<Wave>();
 		player = p;
@@ -25,6 +36,10 @@ public class WaveManager extends GameManager {
 		generateWaves();
 	}
 	
+	/**
+	 * Generate the waves for this manager
+	 * @throws SlickException
+	 */
 	private void generateWaves() throws SlickException {
 		float diff = 1;
 		for(int i = 0; i < numWaves; i++) {
@@ -33,6 +48,9 @@ public class WaveManager extends GameManager {
 		}
 	}
 	
+	/**
+	 * Update the wave
+	 */
 	@Override
 	public void update(GameContainer c, float delta, Player p) throws SlickException {
 		if(waves.size() == 0) {
@@ -46,7 +64,10 @@ public class WaveManager extends GameManager {
 			waves.remove(0);
 		}
 	}
-
+	
+	/**
+	 * Render the Wave
+	 */
 	@Override
 	public void render(Graphics g) {
 		if(waves.size() == 0) {
@@ -55,5 +76,4 @@ public class WaveManager extends GameManager {
 		
 		waves.get(0).render(g);
 	}
-
 }

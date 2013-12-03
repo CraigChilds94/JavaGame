@@ -9,6 +9,13 @@ import org.newdawn.slick.geom.Rectangle;
  */
 public abstract class Collidable extends Rectangle {
     
+	/**
+	 * Construct a collidable object
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 */
     public Collidable(float x, float y, float width, float height) {
         super(x, y, width, height);
     }

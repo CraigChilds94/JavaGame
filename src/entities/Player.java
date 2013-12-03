@@ -20,11 +20,20 @@ public class Player extends Entity {
     
     public Weapon gun;
     
+    /**
+     * Construct a new player for the game
+     * @param start_x
+     * @param start_y
+     * @throws SlickException
+     */
     public Player(float start_x, float start_y) throws SlickException {
         super(start_x, start_y, 30, 30, "res/ship-32.png");
         gun = new RocketLauncher(this, "Destroyer");
     }
     
+    /**
+     * Update the player
+     */
     @Override
     public void update(GameContainer container, float delta) throws SlickException {
         this.c = container;
@@ -55,7 +64,10 @@ public class Player extends Entity {
         
         gun.update(this, c, delta);
     }
-
+    
+    /**
+     * Render the player
+     */
     @Override
     public void render(Graphics g) {
     	g.drawImage(img, x, y);

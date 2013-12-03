@@ -9,7 +9,7 @@ import org.newdawn.slick.SlickException;
 import entities.Player;
 
 /**
- *
+ * Weapons, yummy
  * @author craig
  */
 public abstract class Weapon {
@@ -18,11 +18,32 @@ public abstract class Weapon {
     public float x, y, width, height;
     public ArrayList<Collidable> bullets = new ArrayList<Collidable>();
     
+    /**
+     * Construct a weapon
+     * @param name
+     */
     public Weapon(String name) {
         this.name = name;
     }
     
+    /**
+     * Each weapon fires differently!
+     * @throws SlickException
+     */
     public abstract void fire() throws SlickException;
+    
+    /**
+     * Lets make this drawable
+     * @param g
+     */
     public abstract void render(Graphics g);
+    
+    /**
+     * Update it!!!
+     * @param p
+     * @param con
+     * @param delta
+     * @throws SlickException
+     */
     public abstract void update(Player p, GameContainer con, float delta) throws SlickException;
 }

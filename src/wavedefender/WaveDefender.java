@@ -1,14 +1,9 @@
 package wavedefender;
 import entities.Player;
-import gameobjects.Entity;
 import gameobjects.GameState;
-import gameobjects.Pickup;
-
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import managers.EnemyWave;
 import managers.WaveManager;
 
 import org.newdawn.slick.AppGameContainer;
@@ -18,8 +13,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-
-import pickups.Health;
 
 /**
  * WaveDefender game
@@ -48,17 +41,28 @@ public class WaveDefender extends BasicGame {
             Logger.getLogger(WaveDefender.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * Construct a new game
+     * @param title
+     * @throws SlickException
+     */
     public WaveDefender(String title) throws SlickException {
         super(title);
     }
-
+    
+    /**
+     * Initialise game objs
+     */
     @Override
     public void init(GameContainer container) throws SlickException {
         p = new Player(300, 400);
         wm = new WaveManager(p, 10);
     }
 
+    /**
+     * update everything!!
+     */
     @Override
     public void update(GameContainer container, int delta) throws SlickException {
         
@@ -98,6 +102,9 @@ public class WaveDefender extends BasicGame {
         
     }
 
+    /**
+     * Render everything!!
+     */
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
         if(WaveDefender.gamestate == GameState.MENU) {
