@@ -31,7 +31,7 @@ public class WaveDefender extends BasicGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        // Meh
         try {
             AppGameContainer appgc;
             appgc = new AppGameContainer(new WaveDefender("WaveDefender - " + WaveDefender.VERSION));
