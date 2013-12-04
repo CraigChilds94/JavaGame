@@ -20,7 +20,7 @@ import org.newdawn.slick.SlickException;
  */
 public class WaveDefender extends BasicGame {
     
-    public static String VERSION = "0.1";
+    public static String VERSION = "0.2";
     public Player p;
     public static int baseHealth = 100;
     public static GameState gamestate = GameState.MENU;
