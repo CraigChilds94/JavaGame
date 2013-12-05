@@ -19,13 +19,13 @@ public class Wave extends GameManager {
 	
 	public boolean finished = false;
 	
-	private float initialNumEnemies = 5;
-	private float initialNumPickups = 1;
+	protected float initialNumEnemies = 5;
+	protected float initialNumPickups = 1;
 	
-	private ArrayList<Entity> enemies, dead;
-	private ArrayList<Pickup> pickups, collected;
+	protected ArrayList<Entity> enemies, dead;
+	protected ArrayList<Pickup> pickups, collected;
 	
-	private Player p;
+	protected Player p;
 	
 	/**
 	 * Construct a new Wave
@@ -45,7 +45,7 @@ public class Wave extends GameManager {
 	 * Generate enemy list
 	 * @throws SlickException
 	 */
-	private void initialiseEnemyList() throws SlickException {
+	protected void initialiseEnemyList() throws SlickException {
 		enemies = new ArrayList<Entity>();
 		for(int i = 0; i < initialNumEnemies; i++) {
 			enemies.add(new Ship(new Random().nextInt(450) + 30, -(new Random().nextInt(400)) - 50));
@@ -56,7 +56,7 @@ public class Wave extends GameManager {
 	 * Generate pickup list
 	 * @throws SlickException
 	 */
-	private void initialisePickupList() throws SlickException {
+	protected void initialisePickupList() throws SlickException {
 		pickups = new ArrayList<Pickup>();
 		for(int i = 0; i < initialNumPickups; i++) {
 			//pickups.add(new Health(new Random().nextInt(300) + 30, -300));

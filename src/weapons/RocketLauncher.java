@@ -41,7 +41,7 @@ public class RocketLauncher extends Weapon {
      * Fire it!! (Bored of documenting, can you tell?)
      */
     public void fire() throws SlickException {
-        bullets.add(new Rocket(x, y, -0.5f));
+        bullets.add(new Rocket(x, y, -1f));
     }
     
     /**
@@ -67,17 +67,17 @@ public class RocketLauncher extends Weapon {
         
         for(Collidable rocket : bullets) {
             try {
-		if(!((Drawable)rocket).visible) {
-		    toDestroy.add((Rocket)rocket);
-		} else {
-		    ((Drawable)rocket).update(con, delta);
-		    if(rocket.getY() < 0) {
-		        ((Ammunition)rocket).destroy();
+				if(!((Drawable)rocket).visible) {
+				    toDestroy.add((Rocket)rocket);
+				} else {
+				    ((Drawable)rocket).update(con, delta);
+				    if(rocket.getY() < 0) {
+				        ((Ammunition)rocket).destroy();
+				    }
+				}
+		    } catch (Exception e) {
+		    	e.printStackTrace();
 		    }
-		}
-	    } catch (Exception e) {
-		e.printStackTrace();
-	    }
         }
         
         bullets.removeAll(toDestroy);

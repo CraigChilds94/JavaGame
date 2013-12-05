@@ -29,6 +29,7 @@ public class Player extends Entity {
     public Player(float start_x, float start_y) throws SlickException {
         super(start_x, start_y, 30, 30, "res/ship-32.png");
         gun = new RocketLauncher(this, "Destroyer");
+        speed = speed / 2;
     }
     
     /**
