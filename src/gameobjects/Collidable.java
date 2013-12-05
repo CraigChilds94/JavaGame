@@ -26,7 +26,7 @@ public abstract class Collidable extends Rectangle {
      * @param list 
      */
     public void listenForCollisions(List<Collidable> list) {
-        for(Collidable o : list) {
+    	for(Collidable o : list) {
             if(this.intersects(o)) {
                 this.onCollision(o);
             }

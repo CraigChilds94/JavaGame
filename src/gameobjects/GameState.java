@@ -5,5 +5,6 @@ package gameobjects;
  * @author Craig
  */
 public enum GameState {
-	MENU, PLAYING, PAUSED, GAMEOVER, COMPLETED
+	MENU, PLAYING, PAUSED, GAMEOVER, COMPLETED,
+	GUIDE, EXIT, OPTIONS
 }

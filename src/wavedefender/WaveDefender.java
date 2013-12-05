@@ -1,6 +1,9 @@
 package wavedefender;
 import entities.Player;
 import gameobjects.GameState;
+import gui.Menu;
+import gui.MenuItem;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +27,8 @@ public class WaveDefender extends BasicGame {
     public Player p;
     public static int baseHealth = 100;
     public static GameState gamestate = GameState.MENU;
+    
+    public Menu menu;
     
     public WaveManager wm;
 
@@ -56,7 +61,13 @@ public class WaveDefender extends BasicGame {
      */
     @Override
     public void init(GameContainer container) throws SlickException {
-        p = new Player(300, 400);
+        Color[] colors = new Color[]{Color.white, Color.blue, Color.green};
+    	menu = new Menu();
+        menu.addMenuItem(new MenuItem("Play", 220, 100, 200, 20, colors, GameState.PLAYING));
+        menu.addMenuItem(new MenuItem("Options", 220, 150, 200, 20, colors, GameState.OPTIONS));
+        menu.addMenuItem(new MenuItem("Guide", 220, 200, 200, 20, colors, GameState.GUIDE));
+        menu.addMenuItem(new MenuItem("Exit", 220, 250, 200, 20, colors, GameState.EXIT));
+    	p = new Player(300, 400);
         wm = new WaveManager(p, 10);
     }
 
@@ -68,9 +79,10 @@ public class WaveDefender extends BasicGame {
         
     	// MENU
         if(WaveDefender.gamestate == GameState.MENU) {
-            if(container.getInput().isKeyPressed(Input.KEY_SPACE)) {
+            menu.update(container, delta);
+        	/**if(container.getInput().isKeyPressed(Input.KEY_SPACE)) {
                 WaveDefender.gamestate = GameState.PLAYING;
-            }
+            }**/
             return;
         }
         
@@ -86,7 +98,6 @@ public class WaveDefender extends BasicGame {
         if(WaveDefender.gamestate == GameState.GAMEOVER || WaveDefender.gamestate == GameState.COMPLETED) {
             return;
         }
-        
         
         p.update(container, delta);
         wm.update(container, delta, p);
@@ -108,10 +119,11 @@ public class WaveDefender extends BasicGame {
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
         if(WaveDefender.gamestate == GameState.MENU) {
-            g.setColor(new Color(200, 100, 100));
+            menu.render(g);
+        	/**g.setColor(new Color(200, 100, 100));
             g.drawString("WAVEDEFENDER", 100, 100);
             g.setColor(new Color(200, 200, 200));
-            g.drawString("Press Space to play!", 100, container.getHeight() / 2);
+            g.drawString("Press Space to play!", 100, container.getHeight() / 2);**/
             return;
         }
         
