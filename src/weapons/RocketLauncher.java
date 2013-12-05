@@ -26,11 +26,11 @@ import gameobjects.Weapon;
  */
 public class RocketLauncher extends Weapon {
     
-	/**
-	 * Construct a rocket launcher, oooo that sounds fun!
-	 * @param p
-	 * @param name
-	 */
+    /**
+     * Construct a rocket launcher, oooo that sounds fun!
+     * @param p
+     * @param name
+     */
     public RocketLauncher(Player p, String name) {
         super(name);
         width = 10;
@@ -67,17 +67,17 @@ public class RocketLauncher extends Weapon {
         
         for(Collidable rocket : bullets) {
             try {
-				if(!((Drawable)rocket).visible) {
-				    toDestroy.add((Rocket)rocket);
-				} else {
-				    ((Drawable)rocket).update(con, delta);
-				    if(rocket.getY() < 0) {
-				        ((Ammunition)rocket).destroy();
-				    }
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		if(!((Drawable)rocket).visible) {
+		    toDestroy.add((Rocket)rocket);
+		} else {
+		    ((Drawable)rocket).update(con, delta);
+		    if(rocket.getY() < 0) {
+		        ((Ammunition)rocket).destroy();
+		    }
+		}
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
         }
         
         bullets.removeAll(toDestroy);
