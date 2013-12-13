@@ -1,12 +1,13 @@
 package wavedefender;
 import entities.Player;
-import gameobjects.GameState;
 import gui.Menu;
 import gui.MenuItem;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import levels.GameLevel;
+import managers.LevelManager;
 import managers.WaveManager;
 
 import org.newdawn.slick.AppGameContainer;
@@ -16,6 +17,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+
+import core.GameState;
 
 /**
  * WaveDefender game
@@ -31,6 +34,7 @@ public class WaveDefender extends BasicGame {
     public Menu menu;
     
     public WaveManager wm;
+    public LevelManager lm;
 
     /**
      * @param args the command line arguments
@@ -61,14 +65,27 @@ public class WaveDefender extends BasicGame {
      */
     @Override
     public void init(GameContainer container) throws SlickException {
-        Color[] colors = new Color[]{Color.white, Color.blue, Color.green};
+    	System.out.println("Game initializing...");
+    	
+    	Color[] colors = new Color[]{
+    			// Normal
+    			new Color(255, 255, 255),
+    			// Selected
+    			new Color(106,159,235),
+    			//Pressed
+    			new Color(157,227,116)
+    	};
+    	
     	menu = new Menu();
         menu.addMenuItem(new MenuItem("Play", 220, 100, 200, 20, colors, GameState.PLAYING));
         menu.addMenuItem(new MenuItem("Options", 220, 150, 200, 20, colors, GameState.OPTIONS));
         menu.addMenuItem(new MenuItem("Guide", 220, 200, 200, 20, colors, GameState.GUIDE));
         menu.addMenuItem(new MenuItem("Exit", 220, 250, 200, 20, colors, GameState.EXIT));
     	p = new Player(300, 400);
+    	lm = new LevelManager();
+    	lm.addLevel(new GameLevel(0f,0f,0f,0f));
         wm = new WaveManager(p, 10);
+        System.out.println("Game initialized!");
     }
 
     /**
@@ -80,9 +97,6 @@ public class WaveDefender extends BasicGame {
     	// MENU
         if(WaveDefender.gamestate == GameState.MENU) {
             menu.update(container, delta);
-        	/**if(container.getInput().isKeyPressed(Input.KEY_SPACE)) {
-                WaveDefender.gamestate = GameState.PLAYING;
-            }**/
             return;
         }
         
@@ -101,6 +115,7 @@ public class WaveDefender extends BasicGame {
         
         p.update(container, delta);
         wm.update(container, delta, p);
+        lm.update(container, delta, p);
 
         
         if(WaveDefender.baseHealth < 0) {
@@ -118,12 +133,8 @@ public class WaveDefender extends BasicGame {
      */
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
-        if(WaveDefender.gamestate == GameState.MENU) {
+    	if(WaveDefender.gamestate == GameState.MENU) {
             menu.render(g);
-        	/**g.setColor(new Color(200, 100, 100));
-            g.drawString("WAVEDEFENDER", 100, 100);
-            g.setColor(new Color(200, 200, 200));
-            g.drawString("Press Space to play!", 100, container.getHeight() / 2);**/
             return;
         }
         
@@ -147,6 +158,7 @@ public class WaveDefender extends BasicGame {
             return;
         }
         
+        lm.render(g);
         p.render(g);
         wm.render(g);
         

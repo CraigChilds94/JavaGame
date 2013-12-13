@@ -6,11 +6,12 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import core.GameManager;
+import core.GameState;
 import wavedefender.WaveDefender;
+import waves.BossWave;
+import waves.Wave;
 import entities.Player;
-import gameobjects.GameManager;
-import gameobjects.GameState;
-import gameobjects.Wave;
 
 /**
  * Manage the waves
@@ -42,16 +43,14 @@ public class WaveManager extends GameManager {
 	 */
 	private void generateWaves() throws SlickException {
 		float diff = 1;
-		for(int i = 0; i < numWaves; i++) {
-			Wave wave;
+		for(int i = 1; i <= numWaves; i++) {
 			
-			if(i % 5 == 0 && i < 1) {
-				wave = new BossWave(diff, player);
+			if(i % 5 == 0 && i > 1) {
+				waves.add(new BossWave(diff, player));
 			} else {
-				wave = new Wave(diff, player);
+				waves.add(new Wave(diff, player));
 			}
 			
-			waves.add(wave);
 			diff += 0.7f;
 		}
 	}

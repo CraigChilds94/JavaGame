@@ -7,11 +7,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import core.Collidable;
+import core.Drawable;
+import core.MouseCollider;
 import wavedefender.WaveDefender;
-
-import gameobjects.Collidable;
-import gameobjects.Drawable;
-import gameobjects.MouseCollider;
 
 public class Menu extends Drawable {
 	

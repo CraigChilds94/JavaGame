@@ -1,4 +1,4 @@
-package gameobjects;
+package core;
 
 /**
  * Enum states for the game

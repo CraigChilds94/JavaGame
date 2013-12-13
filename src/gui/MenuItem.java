@@ -5,9 +5,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import gameobjects.Collidable;
-import gameobjects.Drawable;
-import gameobjects.GameState;
+import core.Collidable;
+import core.Drawable;
+import core.GameState;
 
 public class MenuItem extends Drawable {
 	

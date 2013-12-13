@@ -1,8 +1,5 @@
 package entities;
 
-import gameobjects.Entity;
-import gameobjects.Weapon;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -10,6 +7,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import core.Entity;
+import core.Weapon;
 import weapons.RocketLauncher;
 
 /**
@@ -19,6 +18,7 @@ import weapons.RocketLauncher;
 public class Player extends Entity {
     
     public Weapon gun;
+    private float deltaSpeedX = 0f, deltaSpeedY = 0f;
     
     /**
      * Construct a new player for the game
@@ -40,29 +40,33 @@ public class Player extends Entity {
         this.c = container;
         Input input = container.getInput();
         img.setRotation(0f);
+        deltaSpeedX = 0;
+        deltaSpeedY = 0;
         
         if(input.isKeyDown(Input.KEY_LEFT)) {
         	img.setRotation(-6f);
-        	x -= delta * speed;
+        	deltaSpeedX = -(delta * speed);
         }
         
         if(input.isKeyDown(Input.KEY_RIGHT)) {
         	img.setRotation(6f);
-        	x += delta * speed;
+        	deltaSpeedX = (delta * speed);
         }
         
         if(input.isKeyDown(Input.KEY_UP)) {
-        	y -= delta * speed;
+        	deltaSpeedY = -(delta * speed);
         }
         
         if(input.isKeyDown(Input.KEY_DOWN)) {
-            y += delta * speed;
+        	deltaSpeedY = (delta * speed);
         }
         
         if(input.isKeyPressed(Input.KEY_SPACE)) {
             gun.fire();
         }
         
+        x += deltaSpeedX;
+        y += deltaSpeedY;
         gun.update(this, c, delta);
     }
     
@@ -73,5 +77,13 @@ public class Player extends Entity {
     public void render(Graphics g) {
     	g.drawImage(img, x, y);
         gun.render(g);
-    }    
+    } 
+    
+    public float getDeltaX() {
+    	return deltaSpeedX;
+    }
+    
+    public float getDeltaY() {
+    	return deltaSpeedY;
+    }
 }

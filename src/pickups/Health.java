@@ -3,8 +3,8 @@ package pickups;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
+import core.Pickup;
 import entities.Player;
-import gameobjects.Pickup;
 import wavedefender.WaveDefender;
 
 /**

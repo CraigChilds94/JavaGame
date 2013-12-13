@@ -1,12 +1,12 @@
-package managers;
+package waves;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import entities.MegaShip;
 import entities.Player;
 import entities.Ship;
-import gameobjects.Wave;
 
 public class BossWave extends Wave {
 

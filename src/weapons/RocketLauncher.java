@@ -13,12 +13,12 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import core.Ammunition;
+import core.Collidable;
+import core.Drawable;
+import core.Weapon;
 import ammunition.Rocket;
 import entities.Player;
-import gameobjects.Ammunition;
-import gameobjects.Collidable;
-import gameobjects.Drawable;
-import gameobjects.Weapon;
 
 /**
  * Well we need a weapon don't we?

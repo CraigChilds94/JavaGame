@@ -1,10 +1,10 @@
 package ammunition;
 
-import gameobjects.Ammunition;
-import gameobjects.Collidable;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
+
+import core.Ammunition;
+import core.Collidable;
 
 /**
  * Rocket type of ammo

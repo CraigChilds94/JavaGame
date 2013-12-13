@@ -1,4 +1,4 @@
-package gameobjects;
+package waves;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -7,6 +7,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import core.Entity;
+import core.GameManager;
+import core.Pickup;
 import entities.Player;
 import entities.Ship;
 import pickups.Health;

@@ -1,8 +1,6 @@
-package managers;
+package entities;
 
 import org.newdawn.slick.SlickException;
-
-import entities.Ship;
 
 public class MegaShip extends Ship {
 
