@@ -26,7 +26,7 @@ import core.GameState;
  */
 public class WaveDefender extends BasicGame {
     
-    public static String VERSION = "0.2";
+    public static String VERSION = "0.3";
     public Player p;
     public static int baseHealth = 100;
     public static GameState gamestate = GameState.MENU;
@@ -45,6 +45,8 @@ public class WaveDefender extends BasicGame {
             AppGameContainer appgc;
             appgc = new AppGameContainer(new WaveDefender("WaveDefender - " + WaveDefender.VERSION));
             appgc.setDisplayMode(640, 480, false);
+            appgc.setIcon("res/player/ship-16.png");
+            appgc.setShowFPS(false);
             appgc.start();
         } catch (SlickException ex) {
             Logger.getLogger(WaveDefender.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,7 +68,6 @@ public class WaveDefender extends BasicGame {
     @Override
     public void init(GameContainer container) throws SlickException {
     	System.out.println("Game initializing...");
-    	
     	Color[] colors = new Color[]{
     			// Normal
     			new Color(255, 255, 255),
@@ -94,6 +95,11 @@ public class WaveDefender extends BasicGame {
     @Override
     public void update(GameContainer container, int delta) throws SlickException {
         
+    	// Pause when not focused
+    	if(!container.hasFocus()) {
+    		return;
+    	}
+    	
     	// MENU
         if(WaveDefender.gamestate == GameState.MENU) {
             menu.update(container, delta);
@@ -133,6 +139,7 @@ public class WaveDefender extends BasicGame {
      */
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
+    	
     	if(WaveDefender.gamestate == GameState.MENU) {
             menu.render(g);
             return;

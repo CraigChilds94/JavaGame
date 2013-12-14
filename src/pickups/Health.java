@@ -20,9 +20,8 @@ public class Health extends Pickup {
 	 * @param y
 	 * @throws SlickException
 	 */
-	public Health(float x, float y)
-			throws SlickException {
-		super(x, y, 0, 0, "res/health-32.png");
+	public Health(float x, float y) throws SlickException {
+		super(x, y, 0, 0, "res/pickups/health-32.png");
 		width = img.getWidth();
 		height = img.getHeight();
 

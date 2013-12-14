@@ -26,6 +26,9 @@ import entities.Player;
  */
 public class RocketLauncher extends Weapon {
     
+	Player player;
+	public float posOffset = 0;
+	
     /**
      * Construct a rocket launcher, oooo that sounds fun!
      * @param p
@@ -35,13 +38,16 @@ public class RocketLauncher extends Weapon {
         super(name);
         width = 10;
         height = 20;
+        player = p;
     }
     
     /**
      * Fire it!! (Bored of documenting, can you tell?)
      */
     public void fire() throws SlickException {
-        bullets.add(new Rocket(x, y, -1f));
+        Rocket r = new Rocket(x, y, -1f);
+        r.setPlayer(player);
+    	bullets.add(r);
     }
     
     /**
@@ -59,9 +65,9 @@ public class RocketLauncher extends Weapon {
     /**
      * Update the weapon
      */
-    public void update(Player p, GameContainer con, float delta) throws SlickException {
-        x = p.getX() + p.getWidth() / 2;
-        y = p.getY();
+    public void update(GameContainer con, float delta) throws SlickException {
+        x = ((player.getX() + (player.getWidth() / 2)) - (width / 2)) + posOffset;
+        y = player.getY();
         
         ArrayList<Rocket> toDestroy = new ArrayList<Rocket>();
         

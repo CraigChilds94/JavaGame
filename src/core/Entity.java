@@ -14,6 +14,7 @@ public abstract class Entity extends DrawableImage {
     public float speed = 0.4f;
     public boolean alive = true;
     public GameContainer c;
+    public int expOutput = 10;
     
     /**
      * Construct a new Entity
@@ -48,6 +49,10 @@ public abstract class Entity extends DrawableImage {
         if(o instanceof Ammunition) {
             takeDamage(((Ammunition)o).damage);
             o.onCollision(this);
+            
+            if(!alive) {
+            	((Ammunition) o).wasKillingHit(this);
+            }
         }
     }
     

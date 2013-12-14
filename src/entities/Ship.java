@@ -1,9 +1,6 @@
 package entities;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import core.Entity;
@@ -26,11 +23,12 @@ public class Ship extends Entity {
      * @throws SlickException
      */
     public Ship(float start_x, float start_y) throws SlickException {
-        super(start_x, start_y, 25, 25, "res/enemy-1-32.png");
+        super(start_x, start_y, 25, 25, "res/enemies/enemy-1-32.png");
         speed = 0.03f;
         health = 19;
         starting_x = start_x;
         moveDistance = 20;
+        expOutput = 25;
     }
     
     /**

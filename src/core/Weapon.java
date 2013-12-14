@@ -40,10 +40,9 @@ public abstract class Weapon {
     
     /**
      * Update it!!!
-     * @param p
      * @param con
      * @param delta
      * @throws SlickException
      */
-    public abstract void update(Player p, GameContainer con, float delta) throws SlickException;
+    public abstract void update(GameContainer con, float delta) throws SlickException;
 }

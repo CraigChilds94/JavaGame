@@ -8,6 +8,7 @@ public class MegaShip extends Ship {
 		super(start_x, start_y);
 		this.health = 1000;
 		this.speed = speed / 2;
+		expOutput = 100;
 	}
 
 }

@@ -1,6 +1,8 @@
 package entities;
 
-import org.newdawn.slick.Color;
+import java.util.Arrays;
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -9,6 +11,7 @@ import org.newdawn.slick.SlickException;
 
 import core.Entity;
 import core.Weapon;
+import weapons.DoubleRocketLauncher;
 import weapons.RocketLauncher;
 
 /**
@@ -18,6 +21,8 @@ import weapons.RocketLauncher;
 public class Player extends Entity {
     
     public Weapon gun;
+    public int exp, level = 1;
+    public List<Integer> expStages;
     private float deltaSpeedX = 0f, deltaSpeedY = 0f;
     
     /**
@@ -27,9 +32,14 @@ public class Player extends Entity {
      * @throws SlickException
      */
     public Player(float start_x, float start_y) throws SlickException {
-        super(start_x, start_y, 30, 30, "res/ship-32.png");
+        super(start_x, start_y, 30, 30, "res/player/ship-32.png");
         gun = new RocketLauncher(this, "Destroyer");
         speed = speed / 2;
+        
+        // Could probably read all this information from file when saving is added
+        expStages = Arrays.asList(
+        		50, 500, 2000, 4000, 10000, 25000
+        );
     }
     
     /**
@@ -37,7 +47,8 @@ public class Player extends Entity {
      */
     @Override
     public void update(GameContainer container, float delta) throws SlickException {
-        this.c = container;
+        expCheck();
+    	this.c = container;
         Input input = container.getInput();
         img.setRotation(0f);
         deltaSpeedX = 0;
@@ -67,7 +78,7 @@ public class Player extends Entity {
         
         x += deltaSpeedX;
         y += deltaSpeedY;
-        gun.update(this, c, delta);
+        gun.update(c, delta);
     }
     
     /**
@@ -85,5 +96,23 @@ public class Player extends Entity {
     
     public float getDeltaY() {
     	return deltaSpeedY;
+    }
+    
+    private void onLevelUp() throws SlickException {
+    	this.img = new Image("res/player/ship-" + level + "-32.png");
+    	gun = new DoubleRocketLauncher(this, "The beast");
+    }
+    
+    public void onKill(int val) {
+    	exp += val;
+    }
+    
+    private void expCheck() throws SlickException {
+    	System.out.println(exp + " : " + expStages.get(0));
+    	if(exp == expStages.get(0)) {
+    		level = 2;
+    		onLevelUp();
+    		exp++;
+    	}
     }
 }

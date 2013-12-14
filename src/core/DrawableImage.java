@@ -29,6 +29,18 @@ public abstract class DrawableImage extends Drawable {
 	}
 	
 	/**
+	 * Constructor that takes less values
+	 * @param x
+	 * @param y
+	 * @param image
+	 * @throws SlickException
+	 */
+	public DrawableImage(float x, float y, Image image) throws SlickException {
+		super(x, y, image.getWidth(), image.getHeight());
+		img = image;
+	}
+	
+	/**
 	 * Render the image
 	 */
 	public void render(Graphics g) {

@@ -20,7 +20,7 @@ public class Rocket extends Ammunition {
 	 * @throws SlickException
 	 */
     public Rocket(float x, float y, float speed) throws SlickException {
-        super(x - 2, y, 4, 4, speed, 20, "res/bullet-16.png");
+        super(x - 2, y, 4, 4, speed, 20, "res/weapons/bullet-16.png");
     }
     
     /**
@@ -37,6 +37,6 @@ public class Rocket extends Ammunition {
      */
     @Override
     public void onCollision(Collidable o) {
-        this.destroy();
+    	this.destroy();
     }
 }
