@@ -38,7 +38,7 @@ public class Player extends Entity {
         
         // Could probably read all this information from file when saving is added
         expStages = Arrays.asList(
-        		50, 500, 2000, 4000, 10000, 25000
+        		250, 500, 2000, 4000, 10000, 25000
         );
     }
     
@@ -108,7 +108,6 @@ public class Player extends Entity {
     }
     
     private void expCheck() throws SlickException {
-    	System.out.println(exp + " : " + expStages.get(0));
     	if(exp == expStages.get(0)) {
     		level = 2;
     		onLevelUp();

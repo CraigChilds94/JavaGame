@@ -22,7 +22,6 @@ public class DoubleRocketLauncher extends Weapon {
 
 	@Override
 	public void fire() throws SlickException {
-		System.out.println(gun1);
 		gun1.fire();
 		gun2.fire();
 	}
