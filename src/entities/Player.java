@@ -25,6 +25,7 @@ public class Player extends Entity {
     public int exp, level = 1;
     public List<Integer> expStages;
     private float deltaSpeedX = 0f, deltaSpeedY = 0f;
+    private GameInputListener gil;
     
     /**
      * Construct a new player for the game
@@ -41,6 +42,8 @@ public class Player extends Entity {
         expStages = Arrays.asList(
         		250, 500, 2000, 4000, 10000, 25000
         );
+        
+    	gil = new GameInputListener();
     }
     
     /**
@@ -51,7 +54,6 @@ public class Player extends Entity {
     	expCheck();
     	this.delta = delta;
     	this.c = container;
-    	GameInputListener gil = new GameInputListener();
         img.setRotation(0f);
         deltaSpeedX = 0;
         deltaSpeedY = 0;

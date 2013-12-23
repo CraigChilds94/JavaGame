@@ -14,7 +14,6 @@ public class GameInputListener {
 	
 	public GameInputListener() {
 		bindings = new HashMap<String, Set<Integer>>();
-		
 		// UP
 		bindings.put("UP", new HashSet<Integer>(
 				Arrays.asList(Input.KEY_UP)
@@ -40,6 +39,7 @@ public class GameInputListener {
 				Arrays.asList(Input.KEY_ESCAPE)
 		));
 		
+		// FIRE
 		bindings.put("FIRE", new HashSet<Integer>(
 				Arrays.asList(Input.KEY_SPACE)
 		));

@@ -36,49 +36,44 @@ public class Ship extends Entity {
      */
     @Override
     public void update(GameContainer container, float delta) {
-        if(y > container.getHeight() + height) {
+        this.delta = delta;
+    	if(y > container.getHeight() + height) {
             WaveDefender.baseHealth -= this.damage;
             this.alive = false;
         }
         
         if(dir &&x < starting_x + moveDistance) {
-        	img.setRotation(-6f);
-        	x += delta * (speed / 2);
-            if(x > starting_x + moveDistance) {
-                dir = false;
-            }
+        	moveRight();
         } else if(!dir && x > starting_x - moveDistance){
-        	img.setRotation(6f);
-        	x -= delta * (speed / 2);
-            if(x < starting_x - moveDistance) {
-                dir = true;
-            }
+        	moveLeft();
         }
         
-        y += delta * speed;
+        moveDown();
     }
 
 	@Override
-	public void moveUp() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void moveUp() {}
 
 	@Override
 	public void moveDown() {
-		// TODO Auto-generated method stub
-		
+		y += delta * speed;
 	}
 
 	@Override
 	public void moveLeft() {
-		// TODO Auto-generated method stub
-		
+		img.setRotation(6f);
+    	x -= delta * (speed / 2);
+        if(x < starting_x - moveDistance) {
+            dir = true;
+        }
 	}
 
 	@Override
 	public void moveRight() {
-		// TODO Auto-generated method stub
-		
+		img.setRotation(-6f);
+    	x += delta * (speed / 2);
+        if(x > starting_x + moveDistance) {
+            dir = false;
+        }
 	}
 }
