@@ -15,6 +15,7 @@ public abstract class Entity extends DrawableImage {
     public boolean alive = true;
     public GameContainer c;
     public int expOutput = 10;
+    public float delta;
     
     /**
      * Construct a new Entity
@@ -36,7 +37,8 @@ public abstract class Entity extends DrawableImage {
      * @param collidables
      */
     public void update(GameContainer container, float delta, ArrayList<Entity> collidables) {
-        this.c = container;
+        this.delta = delta;
+    	this.c = container;
         speed *= delta;
         this.setBounds(x, y, width, height);
     }
@@ -66,5 +68,10 @@ public abstract class Entity extends DrawableImage {
             alive = false;
         }
     }
+    
+    public abstract void moveUp();
+    public abstract void moveDown();
+    public abstract void moveLeft();
+    public abstract void moveRight();
     
 }

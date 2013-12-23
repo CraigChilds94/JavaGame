@@ -10,6 +10,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import core.Entity;
+import core.GameInputListener;
 import core.Weapon;
 import weapons.DoubleRocketLauncher;
 import weapons.RocketLauncher;
@@ -47,34 +48,15 @@ public class Player extends Entity {
      */
     @Override
     public void update(GameContainer container, float delta) throws SlickException {
-        expCheck();
+    	expCheck();
+    	this.delta = delta;
     	this.c = container;
-        Input input = container.getInput();
+    	GameInputListener gil = new GameInputListener();
         img.setRotation(0f);
         deltaSpeedX = 0;
         deltaSpeedY = 0;
         
-        if(input.isKeyDown(Input.KEY_LEFT)) {
-        	img.setRotation(-6f);
-        	deltaSpeedX = -(delta * speed);
-        }
-        
-        if(input.isKeyDown(Input.KEY_RIGHT)) {
-        	img.setRotation(6f);
-        	deltaSpeedX = (delta * speed);
-        }
-        
-        if(input.isKeyDown(Input.KEY_UP)) {
-        	deltaSpeedY = -(delta * speed);
-        }
-        
-        if(input.isKeyDown(Input.KEY_DOWN)) {
-        	deltaSpeedY = (delta * speed);
-        }
-        
-        if(input.isKeyPressed(Input.KEY_SPACE)) {
-            gun.fire();
-        }
+        gil.listen(container.getInput(), new PlayerInputEvent(this));
         
         x += deltaSpeedX;
         y += deltaSpeedY;
@@ -90,10 +72,18 @@ public class Player extends Entity {
         gun.render(g);
     } 
     
+    /**
+     * Get the deltaX speed of the player
+     * @return the deltaspeed
+     */
     public float getDeltaX() {
     	return deltaSpeedX;
     }
     
+    /**
+     * Get the deltaY speed of the player
+     * @return the deltaspeed
+     */
     public float getDeltaY() {
     	return deltaSpeedY;
     }
@@ -103,6 +93,10 @@ public class Player extends Entity {
     	gun = new DoubleRocketLauncher(this, "The beast");
     }
     
+    /**
+     * When the player gets a kill
+     * @param val, the amount of exp collected
+     */
     public void onKill(int val) {
     	exp += val;
     }
@@ -114,4 +108,26 @@ public class Player extends Entity {
     		exp++;
     	}
     }
+
+	@Override
+	public void moveUp() {
+		deltaSpeedY = -(delta * speed);
+	}
+
+	@Override
+	public void moveDown() {
+		deltaSpeedY = (delta * speed);
+	}
+
+	@Override
+	public void moveLeft() {
+		img.setRotation(-6f);
+    	deltaSpeedX = -(delta * speed);
+	}
+
+	@Override
+	public void moveRight() {
+		img.setRotation(6f);
+    	deltaSpeedX = (delta * speed);
+	}
 }

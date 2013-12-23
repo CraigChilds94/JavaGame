@@ -46,7 +46,7 @@ public class WaveDefender extends BasicGame {
             appgc = new AppGameContainer(new WaveDefender("WaveDefender - " + WaveDefender.VERSION));
             appgc.setDisplayMode(640, 480, false);
             appgc.setIcon("res/player/ship-16.png");
-            appgc.setShowFPS(false);
+            //appgc.setShowFPS(false);
             appgc.start();
         } catch (SlickException ex) {
             Logger.getLogger(WaveDefender.class.getName()).log(Level.SEVERE, null, ex);
