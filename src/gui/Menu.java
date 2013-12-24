@@ -7,6 +7,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import Input.GameInputListener;
+import Input.MenuInputEvent;
+
 import core.Collidable;
 import core.Drawable;
 import core.MouseCollider;
@@ -17,9 +20,12 @@ public class Menu extends Drawable {
 	public ArrayList<Collidable> menuItems;
 	public int selection = 0;
 	
+	private GameInputListener gil;
+	
 	public Menu() {
 		super(0,0,0,0);
 		menuItems = new ArrayList<Collidable>();
+		gil = new GameInputListener();
 	}
 
 	@Override
@@ -31,26 +37,12 @@ public class Menu extends Drawable {
 
 	@Override
 	public void update(GameContainer container, float delta) throws SlickException {
-		Input i = container.getInput();
-		
-		if(i.isKeyPressed(Input.KEY_DOWN)) {
-			if(selection < menuItems.size() - 1) {
-				selection++;
-			}
-		} else if (i.isKeyPressed(Input.KEY_UP)) {
-			if(selection > 0) {
-				selection--;
-			}
-		}
+		gil.listen(container.getInput(), new MenuInputEvent(this));
 		
 		((MenuItem)menuItems.get(selection)).setActive();
 		
 		for(Collidable item : menuItems) {
 			((MenuItem)item).update(container, delta);
-		}
-		
-		if(i.isKeyPressed(Input.KEY_ENTER)) {
-			WaveDefender.gamestate = ((MenuItem)menuItems.get(selection)).getActionState();
 		}
 	}
 

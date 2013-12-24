@@ -9,8 +9,10 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import Input.GameInputListener;
+import Input.PlayerInputEvent;
+
 import core.Entity;
-import core.GameInputListener;
 import core.Weapon;
 import weapons.DoubleRocketLauncher;
 import weapons.RocketLauncher;
