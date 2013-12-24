@@ -1,5 +1,8 @@
 package gui;
 
+import input.GameInputListener;
+import input.MenuInputEvent;
+
 import java.util.ArrayList;
 
 import org.newdawn.slick.GameContainer;
@@ -7,8 +10,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import Input.GameInputListener;
-import Input.MenuInputEvent;
 
 import core.Collidable;
 import core.Drawable;

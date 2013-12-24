@@ -11,6 +11,7 @@ import org.newdawn.slick.SlickException;
 public abstract class DrawableImage extends Drawable {
 	
 	public Image img;
+	public String imagePath;
 	
 	/**
 	 * Construct a drawable which uses an image
@@ -24,6 +25,7 @@ public abstract class DrawableImage extends Drawable {
 	public DrawableImage(float x, float y, float width, float height, String imgPath) throws SlickException {
 		super(x, y, width, height);
 		img = new Image(imgPath);
+		imagePath = imgPath;
 		width = img.getWidth();
 		height = img.getHeight();
 	}

@@ -1,16 +1,18 @@
 package entities;
 
+import input.GameInputListener;
+import input.PlayerInputEvent;
+
 import java.util.Arrays;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import Input.GameInputListener;
-import Input.PlayerInputEvent;
+import animation.Animation;
+
 
 import core.Entity;
 import core.Weapon;
@@ -29,6 +31,8 @@ public class Player extends Entity {
     private float deltaSpeedX = 0f, deltaSpeedY = 0f;
     private GameInputListener gil;
     
+    private Animation animation;
+    
     /**
      * Construct a new player for the game
      * @param start_x
@@ -46,6 +50,7 @@ public class Player extends Entity {
         );
         
     	gil = new GameInputListener();
+    	animation = new Animation(this, 10f, 1f, 0);
     }
     
     /**
@@ -64,6 +69,7 @@ public class Player extends Entity {
         
         x += deltaSpeedX;
         y += deltaSpeedY;
+        animation.update(container, delta);
         gun.update(c, delta);
     }
     
@@ -72,8 +78,9 @@ public class Player extends Entity {
      */
     @Override
     public void render(Graphics g) {
-    	g.drawImage(img, x, y);
-        gun.render(g);
+    	//g.drawImage(img, x, y);
+        animation.render(g);
+    	gun.render(g);
     } 
     
     /**
