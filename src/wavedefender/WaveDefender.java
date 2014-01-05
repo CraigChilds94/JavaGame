@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import levels.GameLevel;
 import managers.LevelManager;
 import managers.WaveManager;
-import network.Server;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -36,8 +35,6 @@ public class WaveDefender extends BasicGame {
     
     public WaveManager wm;
     public LevelManager lm;
-    
-    public Server server;
 
     /**
      * @param args the command line arguments

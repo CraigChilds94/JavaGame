@@ -36,6 +36,7 @@ public class Animation extends DrawableImage {
 
 		this.animationSpeed = speed;
 		getCurrentFrame();
+		current.visit();
 	}
 	
 	public void addFrame(Frame f) throws SlickException {
