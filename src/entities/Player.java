@@ -51,8 +51,8 @@ public class Player extends Entity {
         );
         
     	gil = new GameInputListener();
-    	animation = new Animation(new Frame(0, 0, 0f, this.img, this), 10f, 1f, 0);
-    	animation.setLoop(false);
+    	animation = new Animation(new Frame(0, 0, 1000f, this.img, this), 10f, 1f, 0);
+    	animation.setLoop(true);
     }
     
     

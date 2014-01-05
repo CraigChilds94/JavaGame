@@ -1,4 +1,4 @@
-package Input;
+package input;
 
 import org.newdawn.slick.SlickException;
 
