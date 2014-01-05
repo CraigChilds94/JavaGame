@@ -12,8 +12,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import animation.Animation;
+import animation.Frame;
 
-
+import core.DrawableImage;
 import core.Entity;
 import core.Weapon;
 import weapons.DoubleRocketLauncher;
@@ -50,8 +51,10 @@ public class Player extends Entity {
         );
         
     	gil = new GameInputListener();
-    	animation = new Animation(this, 10f, 1f, 0);
+    	animation = new Animation(new Frame(0, 0, 2f, this.img, this), 10f, 1f, 0);
+    	animation.setLoop(true);
     }
+    
     
     /**
      * Update the player
