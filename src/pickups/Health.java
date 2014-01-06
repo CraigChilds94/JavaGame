@@ -5,7 +5,7 @@ import org.newdawn.slick.SlickException;
 
 import core.Pickup;
 import entities.Player;
-import wavedefender.WaveDefender;
+import wavedefender.Game;
 
 /**
  * We always need to pickup some more health, right?
@@ -32,7 +32,7 @@ public class Health extends Pickup {
 	 */
 	@Override
 	public void doFunctionality(Player p) {
-		WaveDefender.baseHealth += modifierValue;
+		Game.baseHealth += modifierValue;
 	}
 
 	/**

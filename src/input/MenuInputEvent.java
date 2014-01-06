@@ -5,7 +5,7 @@ import gui.MenuItem;
 
 import org.newdawn.slick.SlickException;
 
-import wavedefender.WaveDefender;
+import wavedefender.Game;
 
 
 public class MenuInputEvent extends GameInputEvent {
@@ -21,7 +21,7 @@ public class MenuInputEvent extends GameInputEvent {
 	@Override
 	public void doActionOnPressed(String key) throws SlickException {
 		if(key.equals("ACTION")) {
-			WaveDefender.gamestate = ((MenuItem)menu.menuItems.get(menu.selection)).getActionState();
+			Game.gamestate = ((MenuItem)menu.menuItems.get(menu.selection)).getActionState();
 			return;
 		}
 		

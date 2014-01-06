@@ -4,7 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
 import core.Entity;
-import wavedefender.WaveDefender;
+import wavedefender.Game;
 
 /**
  *
@@ -38,7 +38,7 @@ public class Ship extends Entity {
     public void update(GameContainer container, float delta) {
         this.delta = delta;
     	if(y > container.getHeight() + height) {
-            WaveDefender.baseHealth -= this.damage;
+            Game.baseHealth -= this.damage;
             this.alive = false;
         }
         

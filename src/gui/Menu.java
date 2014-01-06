@@ -14,7 +14,7 @@ import org.newdawn.slick.SlickException;
 import core.Collidable;
 import core.Drawable;
 import core.MouseCollider;
-import wavedefender.WaveDefender;
+import wavedefender.Game;
 
 public class Menu extends Drawable {
 	

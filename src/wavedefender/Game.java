@@ -18,13 +18,14 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import tile.TileMap;
 import core.GameState;
 
 /**
- * WaveDefender game
+ * Game game
  * @author craig
  */
-public class WaveDefender extends BasicGame {
+public class Game extends BasicGame {
     
     public static String VERSION = "0.3";
     public Player p;
@@ -35,6 +36,10 @@ public class WaveDefender extends BasicGame {
     
     public WaveManager wm;
     public LevelManager lm;
+    
+    public static int WIDTH = 640, HEIGHT = 480;
+    
+    public TileMap tilemap;
 
     /**
      * @param args the command line arguments
@@ -43,13 +48,13 @@ public class WaveDefender extends BasicGame {
         // Meh
         try {
             AppGameContainer appgc;
-            appgc = new AppGameContainer(new WaveDefender("WaveDefender - " + WaveDefender.VERSION));
-            appgc.setDisplayMode(640, 480, false);
+            appgc = new AppGameContainer(new Game("Game - " + Game.VERSION));
+            appgc.setDisplayMode(WIDTH, HEIGHT, false);
             appgc.setIcon("res/player/ship-16.png");
             //appgc.setShowFPS(false);
             appgc.start();
         } catch (SlickException ex) {
-            Logger.getLogger(WaveDefender.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -58,7 +63,7 @@ public class WaveDefender extends BasicGame {
      * @param title
      * @throws SlickException
      */
-    public WaveDefender(String title) throws SlickException {
+    public Game(String title) throws SlickException {
         super(title);
     }
     
@@ -87,6 +92,9 @@ public class WaveDefender extends BasicGame {
     	lm.addLevel(new GameLevel(0f,0f,0f,0f));
         wm = new WaveManager(p, 10);
         System.out.println("Game initialized!");
+        
+        
+        tilemap = new TileMap("test", 0, 0, WIDTH, HEIGHT);
     }
 
     /**
@@ -101,35 +109,36 @@ public class WaveDefender extends BasicGame {
     	}
     	
     	// MENU
-        if(WaveDefender.gamestate == GameState.MENU) {
+        if(Game.gamestate == GameState.MENU) {
             menu.update(container, delta);
             return;
         }
         
         // PAUSED
-        if(WaveDefender.gamestate == GameState.PAUSED) {
+        if(Game.gamestate == GameState.PAUSED) {
         	if(container.getInput().isKeyPressed(Input.KEY_SPACE)) {
-                WaveDefender.gamestate = GameState.PLAYING;
+                Game.gamestate = GameState.PLAYING;
             }
         	return;
         }
         
         // GAME OVER
-        if(WaveDefender.gamestate == GameState.GAMEOVER || WaveDefender.gamestate == GameState.COMPLETED) {
+        if(Game.gamestate == GameState.GAMEOVER || Game.gamestate == GameState.COMPLETED) {
             return;
         }
         
+        tilemap.update(container, delta);
         p.update(container, delta);
         wm.update(container, delta, p);
         lm.update(container, delta, p);
 
         
-        if(WaveDefender.baseHealth < 0) {
-            WaveDefender.gamestate = GameState.GAMEOVER;
+        if(Game.baseHealth < 0) {
+            Game.gamestate = GameState.GAMEOVER;
         }
         
         if(container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-            WaveDefender.gamestate = GameState.PAUSED;
+            Game.gamestate = GameState.PAUSED;
         }
     }
 
@@ -139,12 +148,12 @@ public class WaveDefender extends BasicGame {
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
     	
-    	if(WaveDefender.gamestate == GameState.MENU) {
+    	if(Game.gamestate == GameState.MENU) {
             menu.render(g);
             return;
         }
         
-        if(WaveDefender.gamestate == GameState.PAUSED) {
+        if(Game.gamestate == GameState.PAUSED) {
         	g.setColor(new Color(200, 100, 100));
             g.drawString("Game Paused", 100, 100);
             g.setColor(new Color(200, 200, 200));
@@ -152,25 +161,27 @@ public class WaveDefender extends BasicGame {
             return;
         }
         
-        if(WaveDefender.gamestate == GameState.GAMEOVER) {
+        if(Game.gamestate == GameState.GAMEOVER) {
             g.setColor(new Color(200, 100, 100));
             g.drawString("GAME OVERRRRR!", 100, container.getHeight() / 2);
             return;
         }
         
-        if(WaveDefender.gamestate == GameState.COMPLETED) {
+        if(Game.gamestate == GameState.COMPLETED) {
         	g.setColor(new Color(100, 100, 200));
             g.drawString("CONGRATULATIONS!!! WELL DONE!!!!", 100, container.getHeight() / 2);
             return;
         }
         
+        
         lm.render(g);
+        tilemap.render(g);
         p.render(g);
         wm.render(g);
         
         g.setColor(new Color(100, 100, 200));
         g.drawString("WAVE:" + (WaveManager.waveNumber + 1), 10, 30);
-        g.drawString("Base Health:" + WaveDefender.baseHealth, 10, 50);
+        g.drawString("Base Health:" + Game.baseHealth, 10, 50);
 
     }
     
