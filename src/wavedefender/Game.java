@@ -191,7 +191,7 @@ public class Game extends BasicGame {
         
         
         lm.render(g);
-        //tilemap.render(g);
+        tilemap.render(g);
         p.render(g);
         wm.render(g);
         

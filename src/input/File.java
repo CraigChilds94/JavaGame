@@ -20,9 +20,7 @@ public class File {
 		String line;
 		int i = 0;
 		while(!(line = buffreader.readLine().trim()).equals("END")) {
-			System.out.println(line);
 			output[i] = line.split(delimiter);
-			System.out.println(a);
 			i++;
 		}
 		

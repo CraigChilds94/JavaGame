@@ -22,10 +22,10 @@ public class TileMap extends Drawable {
 	
 	public static int tileSize = 32;
 	
-	public static int AIR = 0,
-					  BRICK1 = 1,
-					  BRICK2 = 2,
-					  DIRT = 3;
+	public static final int AIR = 0,
+					        BRICK1 = 1,
+					        BRICK2 = 2,
+					        DIRT = 3;
 	
 	public TileMap(String filename, float x, float y, float width, float height) throws NumberFormatException, SlickException {
 		super(x, y, width, height);
@@ -41,7 +41,11 @@ public class TileMap extends Drawable {
 	}
 
 	@Override
-	public void update(GameContainer container, float delta) throws SlickException {}
+	public void update(GameContainer container, float delta) throws SlickException {
+		for(Tile t : tiles) {
+			t.update(container, delta);
+		}
+	}
 
 	@Override
 	public void onCollision(Collidable o) {}
@@ -73,6 +77,8 @@ public class TileMap extends Drawable {
 	
 	private Tile getTileById(int id, int x, int y) throws SlickException {
 		switch(id) {
+			case TileMap.AIR : return new Air(x, y);
+			case TileMap.DIRT : return new Dirt(x, y);
 			default: return new Air(x, y);
 		}
 	}
