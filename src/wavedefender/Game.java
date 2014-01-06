@@ -122,6 +122,13 @@ public class Game extends BasicGame {
         	return;
         }
         
+        if(Game.gamestate == GameState.GUIDE) {
+        	if(container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+                Game.gamestate = GameState.MENU;
+            }
+        	return;
+        }
+        
         // GAME OVER
         if(Game.gamestate == GameState.GAMEOVER || Game.gamestate == GameState.COMPLETED) {
             return;
@@ -173,9 +180,18 @@ public class Game extends BasicGame {
             return;
         }
         
+        if(Game.gamestate == GameState.GUIDE) {
+        	g.drawString("Guide", 100, 100);
+        	g.drawString(" - Use arrow keys to move", 120, 140);
+        	g.drawString(" - Space bar to shoot", 120, 155);
+        	g.drawString(" - Escape key to pause the game", 120, 170);
+        	g.drawString("Press Escape to go back to the menu", 100, 250);
+        	return;
+        }
+        
         
         lm.render(g);
-        tilemap.render(g);
+        //tilemap.render(g);
         p.render(g);
         wm.render(g);
         
