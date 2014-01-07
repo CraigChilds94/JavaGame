@@ -8,10 +8,10 @@ import org.newdawn.slick.SlickException;
 
 import core.GameManager;
 import core.GameState;
-import wavedefender.Game;
 import waves.BossWave;
 import waves.Wave;
 import entities.Player;
+import game.Game;
 
 /**
  * Manage the waves
@@ -61,7 +61,7 @@ public class WaveManager extends GameManager {
 	@Override
 	public void update(GameContainer c, float delta, Player p) throws SlickException {
 		if(waves.size() == 0) {
-			Game.gamestate = GameState.COMPLETED;
+			GameStateManager.state = GameState.COMPLETED;
 			return;
 		}
 		

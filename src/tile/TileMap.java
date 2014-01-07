@@ -1,5 +1,6 @@
 package tile;
 
+import game.Game;
 import input.File;
 
 import java.io.IOException;
@@ -11,7 +12,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import wavedefender.Game;
 import core.Collidable;
 import core.Drawable;
 

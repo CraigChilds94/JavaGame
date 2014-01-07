@@ -1,5 +1,6 @@
 package gui;
 
+import game.Game;
 import input.GameInputListener;
 import input.MenuInputEvent;
 
@@ -11,10 +12,10 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 
+
 import core.Collidable;
 import core.Drawable;
 import core.MouseCollider;
-import wavedefender.Game;
 
 public class Menu extends Drawable {
 	

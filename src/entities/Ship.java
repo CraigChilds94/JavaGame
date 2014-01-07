@@ -1,10 +1,11 @@
 package entities;
 
+import game.Game;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
 import core.Entity;
-import wavedefender.Game;
 
 /**
  *

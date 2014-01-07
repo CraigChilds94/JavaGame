@@ -5,7 +5,7 @@ import org.newdawn.slick.SlickException;
 
 import core.Pickup;
 import entities.Player;
-import wavedefender.Game;
+import game.Game;
 
 /**
  * We always need to pickup some more health, right?

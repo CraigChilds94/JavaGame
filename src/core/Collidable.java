@@ -39,7 +39,7 @@ public abstract class Collidable extends Rectangle {
      * @param Collidable object 
      */
     public void listenForCollisions(Collidable o) {
-        if(this.intersects(o)) {
+    	if(this.intersects(o)) {
             this.onCollision(o);
         }
     }

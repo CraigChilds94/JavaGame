@@ -3,6 +3,7 @@ package tile;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import core.Collidable;
 import core.DrawableImage;
 
 public abstract class Tile extends DrawableImage {

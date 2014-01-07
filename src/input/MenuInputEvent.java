@@ -1,11 +1,11 @@
 package input;
 
+import game.Game;
 import gui.Menu;
 import gui.MenuItem;
+import managers.GameStateManager;
 
 import org.newdawn.slick.SlickException;
-
-import wavedefender.Game;
 
 
 public class MenuInputEvent extends GameInputEvent {
@@ -21,7 +21,7 @@ public class MenuInputEvent extends GameInputEvent {
 	@Override
 	public void doActionOnPressed(String key) throws SlickException {
 		if(key.equals("ACTION")) {
-			Game.gamestate = ((MenuItem)menu.menuItems.get(menu.selection)).getActionState();
+			GameStateManager.state = ((MenuItem)menu.menuItems.get(menu.selection)).getActionState();
 			return;
 		}
 		
