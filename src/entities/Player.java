@@ -111,8 +111,8 @@ public class Player extends Entity {
      * When the player gets a kill
      * @param val, the amount of exp collected
      */
-    public void onKill(int val) {
-    	exp += val;
+    public void onKill(float expOutput) {
+    	exp += expOutput;
     }
     
     private void expCheck() throws SlickException {

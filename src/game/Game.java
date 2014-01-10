@@ -3,6 +3,7 @@ import entities.Player;
 import gamestate.CompletedState;
 import gamestate.GameoverState;
 import gamestate.GuideState;
+import gamestate.LevelSelectState;
 import gamestate.MenuState;
 import gamestate.PauseState;
 import gamestate.PlayingState;
@@ -80,6 +81,7 @@ public class Game extends BasicGame {
         gsm.addState(GameState.GAMEOVER, new GameoverState());
         gsm.addState(GameState.PLAYING, new PlayingState());
         gsm.addState(GameState.GUIDE, new GuideState());
+        gsm.addState(GameState.LEVEL_SELECT, new LevelSelectState());
         System.out.println("Game initialized!");
     }
 

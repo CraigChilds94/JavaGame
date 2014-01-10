@@ -23,13 +23,13 @@ public class Ship extends Entity {
      * @param start_y
      * @throws SlickException
      */
-    public Ship(float start_x, float start_y) throws SlickException {
+    public Ship(float start_x, float start_y, float diff_mod) throws SlickException {
         super(start_x, start_y, 25, 25, "res/enemies/enemy-1-32.png");
-        speed = 0.03f;
-        health = 19;
+        speed = 0.03f * diff_mod;
+        health = 19 * diff_mod;
         starting_x = start_x;
         moveDistance = 20;
-        expOutput = 25;
+        expOutput = 50 * diff_mod;
     }
     
     /**

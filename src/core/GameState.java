@@ -6,5 +6,5 @@ package core;
  */
 public enum GameState {
 	MENU, PLAYING, PAUSED, GAMEOVER, COMPLETED,
-	GUIDE, EXIT, OPTIONS
+	GUIDE, EXIT, OPTIONS, LEVEL_SELECT
 }

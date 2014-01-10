@@ -24,7 +24,7 @@ public class MenuState extends State {
     			new Color(157,227,116)
     	};
 		menu = new Menu();
-        menu.addMenuItem(new MenuItem("Play", 220, 100, 200, 20, colors, GameState.PLAYING));
+        menu.addMenuItem(new MenuItem("Play", 220, 100, 200, 20, colors, GameState.LEVEL_SELECT));
         menu.addMenuItem(new MenuItem("Options", 220, 150, 200, 20, colors, GameState.OPTIONS));
         menu.addMenuItem(new MenuItem("Guide", 220, 200, 200, 20, colors, GameState.GUIDE));
         menu.addMenuItem(new MenuItem("Exit", 220, 250, 200, 20, colors, GameState.EXIT));

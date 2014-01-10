@@ -14,7 +14,7 @@ public abstract class Entity extends DrawableImage {
     public float speed = 0.4f;
     public boolean alive = true;
     public GameContainer c;
-    public int expOutput = 10;
+    public float expOutput = 10;
     public float delta;
     
     /**

@@ -23,11 +23,8 @@ public class Wave extends GameManager {
 	public boolean finished = false;
 	
 	protected float initialNumEnemies = 5;
-	protected float initialNumPickups = 1;
 	
-	protected ArrayList<Entity> enemies, dead;
-	protected ArrayList<Pickup> pickups, collected;
-	
+	protected ArrayList<Entity> enemies, dead;	
 	protected Player p;
 	
 	/**
@@ -38,31 +35,22 @@ public class Wave extends GameManager {
 	 */
 	public Wave(float diffMod, Player player) throws SlickException {
 		initialNumEnemies *= diffMod;
-		initialNumPickups *= diffMod;
 		p = player;
-		initialiseEnemyList();
-		initialisePickupList();
+		initialiseEnemyList(diffMod);
 	}
 	
 	/**
 	 * Generate enemy list
 	 * @throws SlickException
 	 */
-	protected void initialiseEnemyList() throws SlickException {
+	protected void initialiseEnemyList(float diff) throws SlickException {
 		enemies = new ArrayList<Entity>();
 		for(int i = 0; i < initialNumEnemies; i++) {
-			enemies.add(new Ship(new Random().nextInt(450) + 30, -(new Random().nextInt(400)) - 50));
-		}
-	}
-	
-	/**
-	 * Generate pickup list
-	 * @throws SlickException
-	 */
-	protected void initialisePickupList() throws SlickException {
-		pickups = new ArrayList<Pickup>();
-		for(int i = 0; i < initialNumPickups; i++) {
-			//pickups.add(new Health(new Random().nextInt(300) + 30, -300));
+			enemies.add(new Ship(
+					new Random().nextInt(450) + 30,
+					-(new Random().nextInt(400)) - 50,
+					diff
+			));
 		}
 	}
 	
@@ -81,31 +69,17 @@ public class Wave extends GameManager {
 		}
 		enemies.removeAll(dead);
 		
-		collected = new ArrayList<Pickup>();
-		for(Pickup pup : pickups) {
-			pup.listenForCollisions(p);
-			pup.update(container, delta);
-			if(!pup.visible) {
-				collected.add(pup);
-			}
-		}
-		pickups.removeAll(collected);
-		
 		if(enemies.isEmpty()) {
 			finished = true;
 		}
 	}
 
 	/**
-	 * Render the enemies and pickups
+	 * Render the enemies
 	 */
 	public void render(Graphics g) {
 		for(Entity e : enemies) {
 			e.render(g);
-		}
-		
-		for(Pickup pup : pickups) {
-			pup.render(g);
 		}
 	}
 

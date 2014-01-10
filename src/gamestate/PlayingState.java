@@ -33,7 +33,7 @@ public class PlayingState extends State {
 	
 	@Override
 	public void update(GameContainer c, float delta) throws SlickException {
-		tilemap.update(c, delta);
+		//tilemap.update(c, delta);
         p.update(c, delta);
         wm.update(c, delta, p);
         lm.update(c, delta, p);
@@ -51,7 +51,7 @@ public class PlayingState extends State {
 	@Override
 	public void render(Graphics g) {
 		lm.render(g);
-        tilemap.render(g);
+        //tilemap.render(g);
         p.render(g);
         wm.render(g);
         
