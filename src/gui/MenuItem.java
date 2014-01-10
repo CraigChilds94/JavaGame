@@ -17,8 +17,8 @@ public class MenuItem extends Drawable {
 	
 	private String value;
 	private GameState actionState = GameState.MENU;
-	private boolean active = false;
-	private Color normal, hover, current;
+	private boolean active = false, enabled = true;
+	private Color normal, hover, current, disabled;
 	
 	public MenuItem(String value, float x, float y, float width, float height, Color[] colorPallette, GameState actionState) {
 		super(x, y, width, height);
@@ -26,6 +26,7 @@ public class MenuItem extends Drawable {
 		normal = colorPallette[0];
 		hover = colorPallette[1];
 		current = normal;
+		disabled = new Color(170,170,170);
 		this.actionState = actionState;
 	}
 
@@ -38,27 +39,33 @@ public class MenuItem extends Drawable {
 
 	@Override
 	public void update(GameContainer container, float delta) throws SlickException {
-		active = false;
-		current = normal;
-		Input input = container.getInput();
-		
-		CollidableObject m = new CollidableObject(input.getMouseX(), input.getMouseY(), 1, 1) {
-
-			@Override
-			public void onCollision(Collidable o) {
-				o.onCollision(this);
-			}
+		if(enabled) {
+			active = false;
 			
-		};
-		m.listenForCollisions(this);
-		
-		if(active) {
-			if(input.isMousePressed(0)) {
-				GameStateManager.state = getActionState();
-			} else {
-				current = hover;
+			current = normal;
+			Input input = container.getInput();
+			
+			CollidableObject m = new CollidableObject(input.getMouseX(), input.getMouseY(), 1, 1) {
+
+				@Override
+				public void onCollision(Collidable o) {
+					o.onCollision(this);
+				}
+				
+			};
+			m.listenForCollisions(this);
+			
+			if(active) {
+				if(input.isMousePressed(0)) {
+					GameStateManager.state = getActionState();
+				} else {
+					current = hover;
+				}
 			}
+		} else {
+			current = disabled;
 		}
+		
 	}
 
 	@Override
@@ -72,5 +79,10 @@ public class MenuItem extends Drawable {
 	
 	public GameState getActionState() {
 		return actionState;
+	}
+	
+	public MenuItem setDisabled(boolean f) {
+		enabled = !f;
+		return this;
 	}
 }
