@@ -51,7 +51,7 @@ public class WaveManager extends GameManager {
 				waves.add(new Wave(diff, player));
 			}
 			
-			diff += 0.2f;
+			diff += 0.15f;
 		}
 	}
 	

@@ -36,10 +36,18 @@ public abstract class Ammunition extends DrawableImage {
         this.visible = false;
     }
     
+    /**
+     * Set the player of this ammo
+     * @param p
+     */
     public void setPlayer(Player p) {
     	this.player = p;
     }
     
+    /**
+     * Called when the hit kills the target
+     * @param e
+     */
     public void wasKillingHit(Entity e) {
     	this.player.onKill(e.expOutput);
     }

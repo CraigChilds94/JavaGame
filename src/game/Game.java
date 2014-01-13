@@ -1,5 +1,4 @@
 package game;
-import entities.Player;
 import gamestate.CompletedState;
 import gamestate.GameoverState;
 import gamestate.GuideState;
@@ -7,26 +6,16 @@ import gamestate.LevelSelectState;
 import gamestate.MenuState;
 import gamestate.PauseState;
 import gamestate.PlayingState;
-import gui.Menu;
-import gui.MenuItem;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import levels.GameLevel;
 import managers.GameStateManager;
-import managers.LevelManager;
-import managers.WaveManager;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import tile.TileMap;
 import core.GameState;
 
 /**
@@ -35,7 +24,7 @@ import core.GameState;
  */
 public class Game extends BasicGame {
     
-    public static String VERSION = "0.3";
+    public static String VERSION = "0.7";
     public static int baseHealth = 100;
     
     public GameStateManager gsm;

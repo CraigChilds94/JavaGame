@@ -1,13 +1,9 @@
 package tile;
 
-import game.Game;
 import input.File;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -18,7 +14,7 @@ import core.Drawable;
 public class TileMap extends Drawable {
 
 	private ArrayList<Tile> tiles;
-	private String[][] input;
+	private ArrayList<String[]> input;
 	
 	public static int tileSize = 32;
 	
@@ -50,10 +46,10 @@ public class TileMap extends Drawable {
 	@Override
 	public void onCollision(Collidable o) {}
 	
-	private String[][] getInput(String filename) {
+	private ArrayList<String[]> getInput(String filename) {
 		File f = new File("res/tilemaps/", filename, ".tmap");
 		try {
-			return f.getData(",", (int)width / tileSize, (int)height / tileSize);
+			return f.read(",");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

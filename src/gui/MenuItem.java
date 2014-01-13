@@ -20,6 +20,16 @@ public class MenuItem extends Drawable {
 	private boolean active = false, enabled = true;
 	private Color normal, hover, current, disabled;
 	
+	/**
+	 * Construct a new menu item
+	 * @param value - The text that appears 
+	 * @param x - it's x position
+	 * @param y - it's y position
+	 * @param width - it's width
+	 * @param height - it's height
+	 * @param colorPallette - The colors that will be used for each state
+	 * @param actionState - What the state becomes when this button is pressed
+	 */
 	public MenuItem(String value, float x, float y, float width, float height, Color[] colorPallette, GameState actionState) {
 		super(x, y, width, height);
 		this.value = value;
@@ -29,7 +39,10 @@ public class MenuItem extends Drawable {
 		disabled = new Color(170,170,170);
 		this.actionState = actionState;
 	}
-
+	
+	/**
+	 * Render the MenuItem
+	 */
 	@Override
 	public void render(Graphics g) {
 		g.setColor(current);
@@ -37,6 +50,9 @@ public class MenuItem extends Drawable {
 		active = false;
 	}
 
+	/**
+	 * Update the MenuItem
+	 */
 	@Override
 	public void update(GameContainer container, float delta) throws SlickException {
 		if(enabled) {
@@ -68,19 +84,34 @@ public class MenuItem extends Drawable {
 		
 	}
 
+	/**
+	 * Called when this object collides with something
+	 */
 	@Override
 	public void onCollision(Collidable o) {
 		active = true;
 	}	
 	
+	/**
+	 * Set the MenuItem to active
+	 */
 	public void setActive() {
 		active = true;
 	}
 	
+	/**
+	 * Get the action state of this MenuItem
+	 * @return
+	 */
 	public GameState getActionState() {
 		return actionState;
 	}
 	
+	/**
+	 * Set whether or not this item is disabled
+	 * @param f - true or false
+	 * @return this - allows chaining
+	 */
 	public MenuItem setDisabled(boolean f) {
 		enabled = !f;
 		return this;

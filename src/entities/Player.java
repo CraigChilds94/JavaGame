@@ -115,6 +115,10 @@ public class Player extends Entity {
     	exp += expOutput;
     }
     
+    /**
+     * Check to see if we need to progress in level
+     * @throws SlickException
+     */
     private void expCheck() throws SlickException {
     	if(exp == expStages.get(0)) {
     		level = 2;
@@ -123,22 +127,34 @@ public class Player extends Entity {
     	}
     }
 
+    /**
+	 * This is called when the MoveUp event occurs
+	 */
 	@Override
 	public void moveUp() {
 		deltaSpeedY = -(delta * speed);
 	}
 
+	/**
+	 * This is called when the MoveDown event occurs
+	 */
 	@Override
 	public void moveDown() {
 		deltaSpeedY = (delta * speed);
 	}
 
+	/**
+	 * This is called when the MoveLeft event occurs
+	 */
 	@Override
 	public void moveLeft() {
 		img.setRotation(-6f);
     	deltaSpeedX = -(delta * speed);
 	}
 
+	/**
+	 * This is called when the MoveRight event occurs
+	 */
 	@Override
 	public void moveRight() {
 		img.setRotation(6f);

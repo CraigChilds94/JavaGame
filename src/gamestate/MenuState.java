@@ -14,6 +14,10 @@ public class MenuState extends State {
 	
 	private Menu menu;
 	
+	/**
+	 * Construct a new Menu State
+	 * Initialise any Menu stuff
+	 */
 	public MenuState() {
 		Color[] colors = new Color[]{
     			// Normal
@@ -30,11 +34,17 @@ public class MenuState extends State {
         menu.addMenuItem(new MenuItem("Exit", 220, 250, 200, 20, colors, GameState.EXIT));
 	}
 	
+	/**
+	 * Update the menu
+	 */
 	@Override
 	public void update(GameContainer c, float delta) throws SlickException {
 		menu.update(c, delta);
 	}
 
+	/**
+	 * Render the menu
+	 */
 	@Override
 	public void render(Graphics g) {
 		menu.render(g);

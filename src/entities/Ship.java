@@ -52,14 +52,23 @@ public class Ship extends Entity {
         moveDown();
     }
 
+    /**
+     * This is called when the MoveUp event occurs
+     */
 	@Override
 	public void moveUp() {}
-
+	
+	/**
+	 * This is called when the MoveDown event occurs
+	 */
 	@Override
 	public void moveDown() {
 		y += delta * speed;
 	}
 
+	/**
+	 * This is called when the MoveLeft event occurs
+	 */
 	@Override
 	public void moveLeft() {
 		img.setRotation(6f);
@@ -69,6 +78,9 @@ public class Ship extends Entity {
         }
 	}
 
+	/**
+	 * This is called when the MoveRight event occurs
+	 */
 	@Override
 	public void moveRight() {
 		img.setRotation(-6f);
