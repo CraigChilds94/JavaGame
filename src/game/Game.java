@@ -6,16 +6,19 @@ import gamestate.LevelSelectState;
 import gamestate.MenuState;
 import gamestate.PauseState;
 import gamestate.PlayingState;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import managers.GameStateManager;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import pathfinding.Pathfinder;
 import core.GameState;
 
 /**
@@ -72,6 +75,10 @@ public class Game extends BasicGame {
         gsm.addState(GameState.GUIDE, new GuideState());
         gsm.addState(GameState.LEVEL_SELECT, new LevelSelectState());
         System.out.println("Game initialized!");
+        
+        Pathfinder p = new Pathfinder(4, 4);
+        p.generateNodes();
+        p.findPath(p.nodes.get(2), p.nodes.get(11));
     }
 
     /**
