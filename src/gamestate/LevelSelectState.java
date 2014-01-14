@@ -20,18 +20,14 @@ public class LevelSelectState extends State {
 	
 	
 	public LevelSelectState() {
-		width = 10;
-		height = 10;
+		width = 4;
+		height = 4;
 		p = new Pathfinder(width, height);
         p.generateNodes();
         p.setUnWalkable(1, 0);
         p.setUnWalkable(1, 1);
         p.setUnWalkable(1, 2);
-        p.setUnWalkable(1, 3);
-        p.setUnWalkable(2, 3);
-        p.setUnWalkable(3, 3);
-        p.setUnWalkable(1, 4);
-        p.findPath(4, 21);
+        p.findPath(2, 11);
 	}
 	
 	@Override
