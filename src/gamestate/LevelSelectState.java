@@ -20,14 +20,10 @@ public class LevelSelectState extends State {
 	
 	
 	public LevelSelectState() {
-		width = 4;
-		height = 4;
-		p = new Pathfinder(width, height);
-        p.generateNodes();
-        p.setUnWalkable(1, 0);
-        p.setUnWalkable(1, 1);
-        p.setUnWalkable(1, 2);
-        p.findPath(2, 11);
+		p = new Pathfinder(4);
+        p.createAndLinkNodes();
+        p.setWalkable(1, 1, false);
+        p.findPath(0, 1, 2, 2);
 	}
 	
 	@Override
@@ -44,36 +40,43 @@ public class LevelSelectState extends State {
 		g.drawString("Level Select", 100, 100);
 		g.drawString("Press space to play", 100, 170);
 		
-		for(int i = 0; i < height; i++) {
-			for(int j = 0; j < width; j++) {
-				g.setColor(Color.green);
+		showPathfindingExample(g);
+	}
+	
+	public void showPathfindingExample(Graphics g) {
+		
+		for(int y = 0; y < 4; y++) {
+			for(int x = 0; x < 4; x++) {
+				
+				Node n = p.nodes[x][y];
+				g.setColor(Color.pink);
+				
+				if(!n.walkable) {
+					g.setColor(Color.yellow);
+				}
+				
+				if(p.path.contains(n)) {
+					g.setColor(Color.orange);
+					
+					if(p.path.indexOf(n) == 0) {
+						g.setColor(Color.red);
+					}
+					
+					if(p.path.indexOf(n) == p.path.size() - 1) {
+						g.setColor(Color.blue);
+					}
+				}
+				
+				g.fillRect(n.x * 32, n.y * 32, 32, 32);
+				
+			}
+		}
+		
+		for(int i = 0; i < 4; i++) {
+			for(int j = 0; j < 4; j++) {
+				g.setColor(Color.white);
 				g.drawRect((j * 32), (i * 32), 32, 32);
 			}
-		}
-		
-		for(Node n : p.nodes) {
-			g.setColor(Color.pink);
-			
-			if(!n.walkable) {
-				g.setColor(Color.yellow);
-			}
-			
-			if(p.path.contains(n)) {
-				g.setColor(Color.orange);
-				
-				if(p.path.indexOf(n) == 0) {
-					g.setColor(Color.red);
-				}
-				
-				if(p.path.indexOf(n) == p.path.size() - 1) {
-					g.setColor(Color.blue);
-				}
-			}
-			
-			g.fillRect(n.x * 32, n.y * 32, 32, 32);
-		}
-		
-		for(Node n : p.path) {
 		}
 	}
 

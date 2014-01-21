@@ -12,6 +12,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import core.GameState;
+import tile.PathableTilemap;
 import tile.TileMap;
 import entities.Player;
 import game.Game;
@@ -21,19 +22,20 @@ public class PlayingState extends State {
 	public WaveManager wm;
     public LevelManager lm;
     public Player p;
-    public TileMap tilemap;
+    public PathableTilemap tilemap;
 	
 	public PlayingState() throws SlickException {
 		p = new Player(300, 400);
     	lm = new LevelManager();
     	lm.addLevel(new GameLevel(0f,0f,0f,0f));
         wm = new WaveManager(p, 10);
-        tilemap = new TileMap("test", 0, 0, Game.WIDTH, Game.HEIGHT);
+        //tilemap = new TileMap("test", 0, 0, Game.WIDTH, Game.HEIGHT);
+        tilemap = new PathableTilemap("test", 0, 0, Game.WIDTH, Game.HEIGHT);
 	}
 	
 	@Override
 	public void update(GameContainer c, float delta) throws SlickException {
-		//tilemap.update(c, delta);
+		tilemap.update(c, delta);
         p.update(c, delta);
         wm.update(c, delta, p);
         lm.update(c, delta, p);
@@ -51,7 +53,7 @@ public class PlayingState extends State {
 	@Override
 	public void render(Graphics g) {
 		lm.render(g);
-        //tilemap.render(g);
+        tilemap.render(g);
         p.render(g);
         wm.render(g);
         

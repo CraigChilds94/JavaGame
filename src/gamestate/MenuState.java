@@ -32,6 +32,13 @@ public class MenuState extends State {
         menu.addMenuItem(new MenuItem("Options", 220, 150, 200, 20, colors, GameState.OPTIONS).setDisabled(true));
         menu.addMenuItem(new MenuItem("Guide", 220, 200, 200, 20, colors, GameState.GUIDE));
         menu.addMenuItem(new MenuItem("Exit", 220, 250, 200, 20, colors, GameState.EXIT));
+        
+        int i = 5;
+        int width = 4;
+        System.out.println("x:" + ((i - 1) % width));
+
+        System.out.println("y:" + (i / width));
+        
 	}
 	
 	/**

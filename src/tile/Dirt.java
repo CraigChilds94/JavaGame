@@ -9,6 +9,7 @@ public class Dirt extends Tile {
 	
 	public Dirt(float x, float y) throws SlickException {
 		super(x, y, "dirt");
+		walkable = false;
 	}
 	
 	@Override

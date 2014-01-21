@@ -12,13 +12,13 @@ import java.util.logging.Logger;
 
 import managers.GameStateManager;
 
+import org.lwjgl.Sys;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import pathfinding.Pathfinder;
 import core.GameState;
 
 /**
@@ -47,6 +47,7 @@ public class Game extends BasicGame {
             //appgc.setShowFPS(false);
             appgc.start();
         } catch (SlickException ex) {
+        	Sys.alert("An exception has occurred because of " + ex.getClass().getName() + ": " + ex.getMessage(), VERSION);
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

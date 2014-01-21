@@ -13,8 +13,8 @@ import core.Drawable;
 
 public class TileMap extends Drawable {
 
-	private ArrayList<Tile> tiles;
-	private ArrayList<String[]> input;
+	protected ArrayList<Tile> tiles;
+	protected ArrayList<String[]> input;
 	
 	public static int tileSize = 32;
 	
@@ -46,7 +46,7 @@ public class TileMap extends Drawable {
 	@Override
 	public void onCollision(Collidable o) {}
 	
-	private ArrayList<String[]> getInput(String filename) {
+	protected ArrayList<String[]> getInput(String filename) {
 		File f = new File("res/tilemaps/", filename, ".tmap");
 		try {
 			return f.read(",");
@@ -56,7 +56,7 @@ public class TileMap extends Drawable {
 		return null;
 	}
 	
-	private ArrayList<Tile> generateMap() throws NumberFormatException, SlickException {
+	protected ArrayList<Tile> generateMap() throws NumberFormatException, SlickException {
 		ArrayList<Tile> temp = new ArrayList<Tile>();
 		int x = 0;
 		int y = 0;
@@ -71,7 +71,7 @@ public class TileMap extends Drawable {
 		return temp;
 	}
 	
-	private Tile getTileById(int id, int x, int y) throws SlickException {
+	protected Tile getTileById(int id, int x, int y) throws SlickException {
 		switch(id) {
 			case TileMap.AIR : return new Air(x, y);
 			case TileMap.DIRT : return new Dirt(x, y);
