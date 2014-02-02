@@ -89,4 +89,25 @@ public class Ship extends Entity {
             dir = false;
         }
 	}
+
+	@Override
+	public boolean moveToPoint(float x, float y) {
+		if(this.x < x) {
+			moveRight();
+		} else if(this.x > x) {
+			moveLeft();
+		}
+		
+		if(this.y < y) {
+			moveDown();
+		} else if(this.y > y) {
+			moveUp();
+		}
+		
+		if(this.x == x && this.y == y) {
+			return true;
+		}
+		
+		return false;
+	}
 }

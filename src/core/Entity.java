@@ -73,5 +73,6 @@ public abstract class Entity extends DrawableImage {
     public abstract void moveDown();
     public abstract void moveLeft();
     public abstract void moveRight();
+    public abstract boolean moveToPoint(float x, float y);
     
 }

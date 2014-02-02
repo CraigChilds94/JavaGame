@@ -38,7 +38,6 @@ public class MenuState extends State {
         System.out.println("x:" + ((i - 1) % width));
 
         System.out.println("y:" + (i / width));
-        
 	}
 	
 	/**
@@ -56,5 +55,4 @@ public class MenuState extends State {
 	public void render(Graphics g) {
 		menu.render(g);
 	}
-
 }

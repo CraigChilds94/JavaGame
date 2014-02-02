@@ -6,26 +6,29 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import pathfinding.Node;
 import pathfinding.Pathfinder;
 
 public class PathableTilemap extends TileMap {
 
-	private Pathfinder p;
-	private ArrayList<PathableTile> tiles;
+	public Pathfinder p;
+	private ArrayList<Node> tiles;
 	
 	public PathableTilemap(String filename, float x, float y, float width, float height) throws NumberFormatException, SlickException {
 		super(filename, x, y, width, height);
 		p = new Pathfinder((int) width);
 		tiles = generatePathMap();
+		p.linkNodes(tiles);
 	}
 	
-	public ArrayList<PathableTile> generatePathMap() throws NumberFormatException, SlickException {
-		ArrayList<PathableTile> temp = new ArrayList<PathableTile>();
+	public ArrayList<Node> generatePathMap() throws NumberFormatException, SlickException {
+		ArrayList<Node> temp = new ArrayList<Node>();
 		int x = 0;
 		int y = 0;
 		for(String[] line : input) {
 			for(String id : line) {
-				temp.add(new PathableTile(x, y, getTileById(Integer.parseInt(id), y * tileSize, x * tileSize)));
+				PathableTile t = new PathableTile(x, y, getTileById(Integer.parseInt(id), x * tileSize, y * tileSize));
+				temp.add(t);
 				x++;
 			}
 			x = 0;
@@ -36,15 +39,15 @@ public class PathableTilemap extends TileMap {
 	
 	@Override
 	public void render(Graphics g) {
-		for(PathableTile t : tiles) {
-			t.render(g);
+		for(Node t : tiles) {
+			((PathableTile)t).render(g);
 		}
 	}
 
 	@Override
 	public void update(GameContainer container, float delta) throws SlickException {
-		for(PathableTile t : tiles) {
-			t.update(container, delta);
+		for(Node t : tiles) {
+			((PathableTile)t).update(container, delta);
 		}
 	}
 }

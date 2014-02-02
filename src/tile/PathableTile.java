@@ -11,7 +11,7 @@ public class PathableTile extends Node {
 	
 	public PathableTile(int x, int y, Tile t) {
 		tile = t;
-		walkable = t.walkable;
+		this.walkable = t.walkable;
 		this.x = x;
 		this.y = y;
 	}

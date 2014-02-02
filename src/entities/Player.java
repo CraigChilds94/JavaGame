@@ -43,7 +43,7 @@ public class Player extends Entity {
     public Player(float start_x, float start_y) throws SlickException {
         super(start_x, start_y, 30, 30, "res/player/ship-32.png");
         gun = new RocketLauncher(this, "Destroyer");
-        speed = speed / 2;
+        speed = speed / 7;
         
         // Could probably read all this information from file when saving is added
         expStages = Arrays.asList(
@@ -64,16 +64,19 @@ public class Player extends Entity {
     	expCheck();
     	this.delta = delta;
     	this.c = container;
-        img.setRotation(0f);
-        deltaSpeedX = 0;
-        deltaSpeedY = 0;
+        //deltaSpeedX = 0;
+        //deltaSpeedY = 0;
         
-        gil.listen(container.getInput(), new PlayerInputEvent(this));
+        //gil.listen(container.getInput(), new PlayerInputEvent(this));
         
         x += deltaSpeedX;
         y += deltaSpeedY;
         animation.update(container, delta);
         gun.update(c, delta);
+        
+        deltaSpeedX = 0;
+        deltaSpeedY = 0;
+        //img.setRotation(0f);
     }
     
     /**
@@ -81,7 +84,6 @@ public class Player extends Entity {
      */
     @Override
     public void render(Graphics g) {
-    	//g.drawImage(img, x, y);
         animation.render(g);
     	gun.render(g);
     } 
@@ -132,6 +134,7 @@ public class Player extends Entity {
 	 */
 	@Override
 	public void moveUp() {
+		img.setRotation(0f);
 		deltaSpeedY = -(delta * speed);
 	}
 
@@ -140,6 +143,7 @@ public class Player extends Entity {
 	 */
 	@Override
 	public void moveDown() {
+		img.setRotation(-180f);
 		deltaSpeedY = (delta * speed);
 	}
 
@@ -148,7 +152,7 @@ public class Player extends Entity {
 	 */
 	@Override
 	public void moveLeft() {
-		img.setRotation(-6f);
+		img.setRotation(-90f);
     	deltaSpeedX = -(delta * speed);
 	}
 
@@ -157,7 +161,36 @@ public class Player extends Entity {
 	 */
 	@Override
 	public void moveRight() {
-		img.setRotation(6f);
+		img.setRotation(90f);
     	deltaSpeedX = (delta * speed);
+	}
+
+
+	@Override
+	public boolean moveToPoint(float a, float b) {
+		System.out.println(this.x + " : " + this.y);
+		System.out.println(a + " : " + b);
+		System.out.println("------------------------");
+		
+		int x = (int)a;
+		int y = (int)b;
+		
+		if((int)this.x < x) {
+			moveRight();
+		} else if((int)this.x > x) {
+			moveLeft();
+		}
+		
+		if((int)this.y < y) {
+			moveDown();
+		} else if((int)this.y > y) {
+			moveUp();
+		}
+		
+		if((int)this.x == x && (int)this.y == y) {
+			return true;
+		}
+		
+		return false;
 	}
 }
