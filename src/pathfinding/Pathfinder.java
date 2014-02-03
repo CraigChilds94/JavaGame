@@ -127,7 +127,6 @@ public class Pathfinder {
 		// Loop until the open list is empty
 		Node current = null;
 		while(!open.isEmpty()) {
-			
 			// Get the node from the open list (lowest f is at index 0)
 			current = open.get(0);
 			
@@ -171,14 +170,14 @@ public class Pathfinder {
 				// If this node doesn't have a parent, or it's path is better than previous, set it's parent to the current node
 				if(current.g + current.movecost < n.g || n.parent == null) {
 					n.parent = current;
+					
+					// Position the node in the open list sorted by f value
+					int i = 0;
+					while(i < open.size() && !(n.f < open.get(i).f)) {
+						i++;
+					}
+					open.add(i,n);
 				}
-				
-				// Position the node in the open list sorted by f value
-				int i = 0;
-				while(i < open.size() && !(n.f < open.get(i).f)) {
-					i++;
-				}
-				open.add(i,n);
 			}
 		}
 		
