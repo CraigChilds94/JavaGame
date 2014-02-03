@@ -13,12 +13,11 @@ import org.newdawn.slick.SlickException;
 
 import animation.Animation;
 import animation.Frame;
-
 import core.DrawableImage;
 import core.Entity;
-import core.Weapon;
 import weapons.DoubleRocketLauncher;
 import weapons.RocketLauncher;
+import weapons.Weapon;
 
 /**
  *
@@ -43,7 +42,7 @@ public class Player extends Entity {
     public Player(float start_x, float start_y) throws SlickException {
         super(start_x, start_y, 30, 30, "res/player/ship-32.png");
         gun = new RocketLauncher(this, "Destroyer");
-        speed = speed / 7;
+        speed = speed / 2;
         
         // Could probably read all this information from file when saving is added
         expStages = Arrays.asList(
@@ -64,10 +63,10 @@ public class Player extends Entity {
     	expCheck();
     	this.delta = delta;
     	this.c = container;
-        //deltaSpeedX = 0;
-        //deltaSpeedY = 0;
+        deltaSpeedX = 0;
+        deltaSpeedY = 0;
         
-        //gil.listen(container.getInput(), new PlayerInputEvent(this));
+        gil.listen(container.getInput(), new PlayerInputEvent(this));
         
         x += deltaSpeedX;
         y += deltaSpeedY;
@@ -76,7 +75,7 @@ public class Player extends Entity {
         
         deltaSpeedX = 0;
         deltaSpeedY = 0;
-        //img.setRotation(0f);
+        img.setRotation(0f);
     }
     
     /**

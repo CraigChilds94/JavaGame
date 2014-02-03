@@ -3,7 +3,6 @@ package ammunition;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
-import core.Ammunition;
 import core.Collidable;
 
 /**
@@ -25,6 +24,8 @@ public class Rocket extends Ammunition {
     
     /**
      * Update the rockets info
+     * @param container the game container
+     * @param delta the delta time of the game
      */
     @Override
     public void update(GameContainer container, float delta) {
@@ -34,6 +35,7 @@ public class Rocket extends Ammunition {
 
     /**
      * If this collides with an object do something
+     * @param o The object with which this collides
      */
     @Override
     public void onCollision(Collidable o) {

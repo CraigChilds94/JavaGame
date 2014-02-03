@@ -1,4 +1,4 @@
-package core;
+package weapons;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import core.Collidable;
 import entities.Player;
 
 /**

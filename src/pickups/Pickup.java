@@ -1,7 +1,9 @@
-package core;
+package pickups;
 
 import org.newdawn.slick.SlickException;
 
+import core.Collidable;
+import core.DrawableImage;
 import entities.Player;
 
 /**

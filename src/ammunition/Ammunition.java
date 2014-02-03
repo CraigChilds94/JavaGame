@@ -1,11 +1,13 @@
-package core;
+package ammunition;
 
 import org.newdawn.slick.SlickException;
 
+import core.DrawableImage;
+import core.Entity;
 import entities.Player;
 
 /**
- *
+ * Represents ammunition which is fired by a weapon
  * @author craig
  */
 public abstract class Ammunition extends DrawableImage {

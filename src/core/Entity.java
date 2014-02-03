@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
+import ammunition.Ammunition;
+
 /**
  * Entity data type for collidable, drawable and movable objects
  * @author craig

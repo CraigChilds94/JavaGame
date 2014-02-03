@@ -12,6 +12,10 @@ public class GameInputListener {
 	
 	public HashMap<String, Set<Integer>> bindings;
 	
+	/**
+	 * Construct a new game input listener
+	 * and set up all of the bindings
+	 */
 	public GameInputListener() {
 		bindings = new HashMap<String, Set<Integer>>();
 		// UP
@@ -45,6 +49,12 @@ public class GameInputListener {
 		));
 	}
 	
+	/**
+	 * Listen for input events
+	 * @param input The games input
+	 * @param event	The event to look for
+	 * @throws SlickException
+	 */
 	public void listen(Input input, GameInputEvent event) throws SlickException {
 		for(String key : bindings.keySet()) {
 			for(int i : bindings.get(key)) {

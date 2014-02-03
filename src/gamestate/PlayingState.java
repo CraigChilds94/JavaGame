@@ -15,6 +15,8 @@ import pathfinding.PathNavigator;
 import core.GameState;
 import tile.PathableTilemap;
 import tile.TileMap;
+import worker.PlayerWorker;
+import worker.WaveWorker;
 import entities.Player;
 import game.Game;
 
@@ -38,7 +40,7 @@ public class PlayingState extends State {
 	
 	@Override
 	public void update(GameContainer c, float delta) throws SlickException {
-		tilemap.update(c, delta);
+		/**tilemap.update(c, delta);
 		
 		if(navi.current() != null) {
 			boolean a = p.moveToPoint(navi.current().x * 32, navi.current().y * 32);
@@ -49,12 +51,14 @@ public class PlayingState extends State {
 					navi.next();
 				}
 			}
-		}
+		}**/
 		
-		p.update(c, delta);
+		Thread playerThread = new Thread(new PlayerWorker(p,c, delta));
+		playerThread.start();
+		lm.update(c, delta, p);
 		
-        //wm.update(c, delta, p);
-        //lm.update(c, delta, p);
+		Thread t = new Thread(new WaveWorker(wm, c, delta, p));
+		t.start();
 
         
         if(Game.baseHealth < 0) {
@@ -68,10 +72,10 @@ public class PlayingState extends State {
 
 	@Override
 	public void render(Graphics g) {
-		//lm.render(g);
-        tilemap.render(g);
+		lm.render(g);
+        //tilemap.render(g);
         p.render(g);
-        //wm.render(g);
+        wm.render(g);
         
         g.setColor(new Color(100, 100, 200));
         g.drawString("WAVE:" + (WaveManager.waveNumber + 1), 10, 30);

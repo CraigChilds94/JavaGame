@@ -44,6 +44,7 @@ public abstract class DrawableImage extends Drawable {
 	
 	/**
 	 * Render the image
+	 * @param g the graphics
 	 */
 	public void render(Graphics g) {
 		g.drawImage(img, x, y);

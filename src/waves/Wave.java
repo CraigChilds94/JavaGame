@@ -9,10 +9,10 @@ import org.newdawn.slick.SlickException;
 
 import core.Entity;
 import core.GameManager;
-import core.Pickup;
 import entities.Player;
 import entities.Ship;
 import pickups.Health;
+import pickups.Pickup;
 
 /**
  * Holds information about a wave
