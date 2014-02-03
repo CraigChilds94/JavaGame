@@ -49,4 +49,10 @@ public class MenuState extends State {
 	public void render(Graphics g) {
 		menu.render(g);
 	}
+
+	@Override
+	public void onLoad() throws Exception, SlickException {}
+	
+	@Override
+	public void onLeave() {}
 }

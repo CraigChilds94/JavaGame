@@ -73,7 +73,9 @@ public class MenuItem extends Drawable {
 			
 			if(active) {
 				if(input.isMousePressed(0)) {
-					GameStateManager.state = getActionState();
+					try {
+						GameStateManager.set(getActionState());
+					} catch (Exception e) {}
 				}
 				
 				current = hover;

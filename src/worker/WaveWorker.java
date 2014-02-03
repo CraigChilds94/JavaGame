@@ -22,16 +22,7 @@ public class WaveWorker implements Runnable {
 	
 	@Override
 	public void run() {
-		System.out.println("wm-worker");
-		try {
-			synchronized(player){
-				wm.update(con, delta, player);
-			}
-		} catch (SlickException e) {
-			//e.printStackTrace();
-		}
-		
-		Thread.yield();
+		// TODO
 	}
 
 }

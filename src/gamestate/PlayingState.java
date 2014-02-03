@@ -33,9 +33,6 @@ public class PlayingState extends State {
     	lm = new LevelManager();
     	lm.addLevel(new GameLevel(0f,0f,0f,0f));
         wm = new WaveManager(p, 10);
-        //tilemap = new TileMap("test", 0, 0, Game.WIDTH, Game.HEIGHT);
-        tilemap = new PathableTilemap("test", 0, 0, Game.WIDTH, Game.HEIGHT);
-        navi = new PathNavigator(tilemap.p.findPath(3, 0, 3, 7));
 	}
 	
 	@Override
@@ -53,20 +50,22 @@ public class PlayingState extends State {
 			}
 		}**/
 		
-		Thread playerThread = new Thread(new PlayerWorker(p,c, delta));
-		playerThread.start();
+		p.update(c, delta);
 		lm.update(c, delta, p);
 		
-		Thread t = new Thread(new WaveWorker(wm, c, delta, p));
-		t.start();
+		wm.update(c, delta, p);
 
         
         if(Game.baseHealth < 0) {
-            GameStateManager.state = GameState.GAMEOVER;
+        	try {
+				GameStateManager.set(GameState.GAMEOVER);
+			} catch (Exception e) {}
         }
         
         if(c.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-        	GameStateManager.state = GameState.PAUSED;
+        	try {
+				GameStateManager.set(GameState.PAUSED);
+			} catch (Exception e) {}
         }
 	}
 
@@ -81,5 +80,14 @@ public class PlayingState extends State {
         g.drawString("WAVE:" + (WaveManager.waveNumber + 1), 10, 30);
         g.drawString("Base Health:" + Game.baseHealth, 10, 50);
 	}
+
+	@Override
+	public void onLoad() throws Exception, SlickException {
+        tilemap = new PathableTilemap("test", 0, 0, Game.WIDTH, Game.HEIGHT);
+        navi = new PathNavigator(tilemap.p.findPath(3, 0, 3, 7));
+	}
+	
+	@Override
+	public void onLeave() {}
 
 }

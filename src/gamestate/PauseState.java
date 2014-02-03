@@ -17,7 +17,9 @@ public class PauseState extends State {
 	@Override
 	public void update(GameContainer c, float delta) throws SlickException {
 		if(c.getInput().isKeyPressed(Input.KEY_SPACE)) {
-            GameStateManager.state = GameState.PLAYING;
+			try {
+				GameStateManager.set(GameState.PLAYING);
+			} catch (Exception e) {}
         }
 	}
 
@@ -28,5 +30,11 @@ public class PauseState extends State {
         g.setColor(new Color(200, 200, 200));
         g.drawString("Press Space to resume!", 100, Game.HEIGHT / 2);
 	}
+
+	@Override
+	public void onLoad() throws Exception, SlickException {}
+	
+	@Override
+	public void onLeave() {}
 
 }

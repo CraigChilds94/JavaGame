@@ -19,13 +19,7 @@ public class PlayerWorker implements Runnable {
 	
 	@Override
 	public void run() {
-		System.out.println("player-worker");
-		try {
-			p.update(con, delta);
-		} catch (SlickException e) {
-			//e.printStackTrace();
-		}
-		Thread.yield();
+		// TODO
 	}
 
 }

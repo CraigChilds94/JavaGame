@@ -9,7 +9,8 @@ import entities.Player;
 public abstract class State {
 
 	public abstract void update(GameContainer c, float delta) throws SlickException;
-
 	public abstract void render(Graphics g);
+	public abstract void onLoad() throws Exception, SlickException;
+	public abstract void onLeave();
 
 }

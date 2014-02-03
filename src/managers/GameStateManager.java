@@ -15,7 +15,7 @@ import gamestate.State;
 public class GameStateManager extends GameManager {
 
 	public static GameState state = GameState.MENU;
-	private HashMap<GameState, State> states;
+	private static HashMap<GameState, State> states;
 	
 	public GameStateManager() {
 		states = new HashMap<GameState, State>();
@@ -33,6 +33,11 @@ public class GameStateManager extends GameManager {
 	@Override
 	public void render(Graphics g) {
 		((State)states.get(state)).render(g);
+	}
+	
+	public static void set(GameState state) throws SlickException, Exception {
+		GameStateManager.state = state;
+		((State)states.get(state)).onLoad();
 	}
 
 }

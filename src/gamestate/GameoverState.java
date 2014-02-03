@@ -17,7 +17,9 @@ public class GameoverState extends State {
 	@Override
 	public void update(GameContainer c, float delta) throws SlickException {
 		if(c.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-            GameStateManager.state = GameState.MENU;
+			try {
+				GameStateManager.set(GameState.MENU);
+			} catch (Exception e) {}
         }
 	}
 
@@ -27,4 +29,9 @@ public class GameoverState extends State {
         g.drawString("GAME OVERRRRR!", 100, Game.HEIGHT / 2);
 	}
 
+	@Override
+	public void onLoad() throws Exception, SlickException {}
+
+	@Override
+	public void onLeave() {}
 }

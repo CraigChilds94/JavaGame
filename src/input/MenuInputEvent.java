@@ -21,7 +21,9 @@ public class MenuInputEvent extends GameInputEvent {
 	@Override
 	public void doActionOnPressed(String key) throws SlickException {
 		if(key.equals("ACTION")) {
-			GameStateManager.state = ((MenuItem)menu.menuItems.get(menu.selection)).getActionState();
+			try {
+				GameStateManager.set(((MenuItem)menu.menuItems.get(menu.selection)).getActionState());
+			} catch (Exception e) {}
 			return;
 		}
 		
