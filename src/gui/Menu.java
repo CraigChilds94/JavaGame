@@ -23,11 +23,13 @@ public class Menu extends Drawable {
 	public int selection = 0;
 	
 	private GameInputListener gil;
+	private MenuInputEvent mie;
 	
 	public Menu() {
 		super(0,0,0,0);
 		menuItems = new ArrayList<Collidable>();
 		gil = new GameInputListener();
+		mie = new MenuInputEvent(this);
 	}
 
 	@Override
@@ -39,8 +41,8 @@ public class Menu extends Drawable {
 
 	@Override
 	public void update(GameContainer container, float delta) throws SlickException {
-		gil.listen(container.getInput(), new MenuInputEvent(this));
 		
+		gil.listen(container.getInput(), mie);
 		((MenuItem)menuItems.get(selection)).setActive();
 		
 		for(Collidable item : menuItems) {

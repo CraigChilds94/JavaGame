@@ -18,7 +18,7 @@ public class MenuItem extends Drawable {
 	private String value;
 	private GameState actionState = GameState.MENU;
 	private boolean active = false, enabled = true;
-	private Color normal, hover, current, disabled;
+	private Color normal, hover, current, disabled, selected;
 	
 	/**
 	 * Construct a new menu item
@@ -34,7 +34,8 @@ public class MenuItem extends Drawable {
 		super(x, y, width, height);
 		this.value = value;
 		normal = colorPallette[0];
-		hover = colorPallette[1];
+		selected = colorPallette[1];
+		hover = colorPallette[2];
 		current = normal;
 		disabled = new Color(170,170,170);
 		this.actionState = actionState;
@@ -56,9 +57,8 @@ public class MenuItem extends Drawable {
 	@Override
 	public void update(GameContainer container, float delta) throws SlickException {
 		if(enabled) {
-			active = false;
-			
 			current = normal;
+			
 			Input input = container.getInput();
 			
 			CollidableObject m = new CollidableObject(input.getMouseX(), input.getMouseY(), 1, 1) {
@@ -67,17 +67,19 @@ public class MenuItem extends Drawable {
 				public void onCollision(Collidable o) {
 					o.onCollision(this);
 				}
-				
+
 			};
 			m.listenForCollisions(this);
 			
 			if(active) {
 				if(input.isMousePressed(0)) {
 					GameStateManager.state = getActionState();
-				} else {
-					current = hover;
 				}
+				
+				current = hover;
 			}
+			
+			
 		} else {
 			current = disabled;
 		}
@@ -90,6 +92,7 @@ public class MenuItem extends Drawable {
 	@Override
 	public void onCollision(Collidable o) {
 		active = true;
+		current = hover;
 	}	
 	
 	/**
@@ -97,6 +100,7 @@ public class MenuItem extends Drawable {
 	 */
 	public void setActive() {
 		active = true;
+		current = selected;
 	}
 	
 	/**
