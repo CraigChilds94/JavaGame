@@ -11,6 +11,10 @@ public class PathNavigator {
 	}
 	
 	public Node current() {
+		if(path == null) {
+			return null;
+		}
+		
 		if(path.size() > 0) {
 			return path.get(path.size() - 1);
 		}
@@ -24,6 +28,10 @@ public class PathNavigator {
 	}
 	
 	public boolean atEnd() {
+		if(path == null) {
+			return true;
+		}
+		
 		return path.isEmpty();
 	}
 	

@@ -63,10 +63,10 @@ public class Player extends Entity {
     	expCheck();
     	this.delta = delta;
     	this.c = container;
-        deltaSpeedX = 0;
-        deltaSpeedY = 0;
+        //deltaSpeedX = 0;
+        //deltaSpeedY = 0;
         
-        gil.listen(container.getInput(), new PlayerInputEvent(this));
+        //gil.listen(container.getInput(), new PlayerInputEvent(this));
         
         x += deltaSpeedX;
         y += deltaSpeedY;
@@ -75,7 +75,7 @@ public class Player extends Entity {
         
         deltaSpeedX = 0;
         deltaSpeedY = 0;
-        img.setRotation(0f);
+        //img.setRotation(0f);
     }
     
     /**
@@ -101,6 +101,14 @@ public class Player extends Entity {
      */
     public float getDeltaY() {
     	return deltaSpeedY;
+    }
+    
+    public float getXPos() {
+    	return this.x;
+    }
+    
+    public float getYPos() {
+    	return this.y;
     }
     
     private void onLevelUp() throws SlickException {
@@ -167,10 +175,6 @@ public class Player extends Entity {
 
 	@Override
 	public boolean moveToPoint(float a, float b) {
-		System.out.println(this.x + " : " + this.y);
-		System.out.println(a + " : " + b);
-		System.out.println("------------------------");
-		
 		int x = (int)a;
 		int y = (int)b;
 		

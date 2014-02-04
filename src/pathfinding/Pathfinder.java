@@ -2,6 +2,7 @@ package pathfinding;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 public class Pathfinder {
 	
@@ -183,5 +184,24 @@ public class Pathfinder {
 		
 		// If there's no path return null
 		return null;
+	}
+	
+	public ArrayList<Node> getRandomPath(int startX, int startY) {
+		Random ran = new Random();
+		int x = ran.nextInt(this.size) / 32;
+		int y = ran.nextInt(this.size) / 32;
+		if(nodes[y][x] != null) {
+			System.out.println(nodes[y][x].walkable + " - " + y + " : " +x );
+			if(nodes[y][x].walkable) {
+				ArrayList<Node> p = this.findPath(startY, startX, y, x);
+				System.out.println(x + " : " + y);
+				System.out.println(p);
+				System.out.println();
+				if(p != null) {
+					path = p;
+				}
+			}
+		}
+		return path;
 	}
 }
