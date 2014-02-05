@@ -173,6 +173,7 @@ public class Player extends Entity {
 	}
 
 
+	/*
 	@Override
 	public boolean moveToPoint(float a, float b) {
 		int x = (int)a;
@@ -195,5 +196,28 @@ public class Player extends Entity {
 		}
 		
 		return false;
+	}
+	*/
+	
+	@Override
+	public boolean moveToPoint(float x, float y) {
+		int newX = (int)x;
+		int newY = (int)y;
+		int curX = (int)this.x;
+		int curY = (int)this.y;
+
+		if (curX < newX) {
+			moveRight();
+		} else if (curX > newX) {
+			moveLeft();
+		}
+
+		if (curY < newY) {
+			moveDown();
+		} else if (curY > newY) {
+			moveUp();
+		}
+
+		return (curX == newX && curY == newY);
 	}
 }
