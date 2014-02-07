@@ -63,10 +63,8 @@ public class Player extends Entity {
     	expCheck();
     	this.delta = delta;
     	this.c = container;
-        //deltaSpeedX = 0;
-        //deltaSpeedY = 0;
         
-        //gil.listen(container.getInput(), new PlayerInputEvent(this));
+        gil.listen(container.getInput(), new PlayerInputEvent(this));
         
         x += deltaSpeedX;
         y += deltaSpeedY;
@@ -75,7 +73,7 @@ public class Player extends Entity {
         
         deltaSpeedX = 0;
         deltaSpeedY = 0;
-        //img.setRotation(0f);
+        img.setRotation(0f);
     }
     
     /**

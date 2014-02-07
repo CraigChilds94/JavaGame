@@ -38,7 +38,8 @@ public class PlayingState extends State {
 	
 	@Override
 	public void update(GameContainer c, float delta) throws SlickException {
-		tilemap.update(c, delta);
+		
+		/*tilemap.update(c, delta);
 		
 		if(navi.current() != null) {
 			boolean a = p.moveToPoint(navi.current().x * 32, navi.current().y * 32);
@@ -50,10 +51,10 @@ public class PlayingState extends State {
 		if(navi.atEnd()) {
 			navi.addPath(tilemap.p.findPath(3, 7, 2, 12));
 		}
-		
+		*/
 		p.update(c, delta);
-		//lm.update(c, delta, p);
-		//wm.update(c, delta, p);
+		lm.update(c, delta, p);
+		wm.update(c, delta, p);
 
         
         if(Game.baseHealth < 0) {
@@ -71,10 +72,10 @@ public class PlayingState extends State {
 
 	@Override
 	public void render(Graphics g) {
-		//lm.render(g);
-        tilemap.render(g);
+		lm.render(g);
+        //tilemap.render(g);
         p.render(g);
-        //wm.render(g);
+        wm.render(g);
         
         g.setColor(new Color(100, 100, 200));
         g.drawString("WAVE:" + (WaveManager.waveNumber + 1), 10, 30);
