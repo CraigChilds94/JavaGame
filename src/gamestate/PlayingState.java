@@ -30,7 +30,7 @@ public class PlayingState extends State {
     PathNavigator navi;
 	
 	public PlayingState() throws SlickException {
-		p = new Player(0, 3*32);
+		p = new Player(2*32, 3*32);
     	lm = new LevelManager();
     	lm.addLevel(new GameLevel(0f,0f,0f,0f));
         wm = new WaveManager(p, 10);

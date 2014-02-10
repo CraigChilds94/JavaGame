@@ -1,20 +1,26 @@
 package entities;
 
+import game.Game;
 import input.GameInputListener;
 import input.PlayerInputEvent;
 
 import java.util.Arrays;
 import java.util.List;
 
+import managers.GameStateManager;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import ammunition.Ammunition;
 import animation.Animation;
 import animation.Frame;
+import core.Collidable;
 import core.DrawableImage;
 import core.Entity;
+import core.GameState;
 import weapons.DoubleRocketLauncher;
 import weapons.RocketLauncher;
 import weapons.Weapon;
@@ -26,21 +32,25 @@ import weapons.Weapon;
 public class Player extends Entity {
     
     public Weapon gun;
-    public int exp, level = 1;
+    public int exp, level = 1, lives = 3;
     public List<Integer> expStages;
-    private float deltaSpeedX = 0f, deltaSpeedY = 0f;
+    private float deltaSpeedX = 0f, deltaSpeedY = 0f, startx, starty;
     private GameInputListener gil;
     
     private Animation animation;
     
     /**
      * Construct a new player for the game
-     * @param start_x
-     * @param start_y
+     * @param startx
+     * @param starty
      * @throws SlickException
      */
-    public Player(float start_x, float start_y) throws SlickException {
-        super(start_x, start_y, 30, 30, "res/player/ship-32.png");
+    public Player(float startx, float starty) throws SlickException {
+        super(startx, starty, 30, 30, "res/player/ship-32.png");
+        
+        this.startx = startx;
+        this.starty = starty;
+        
         gun = new RocketLauncher(this, "Destroyer");
         speed = speed / 2;
         
@@ -65,7 +75,6 @@ public class Player extends Entity {
     	this.c = container;
         
         gil.listen(container.getInput(), new PlayerInputEvent(this));
-        
         x += deltaSpeedX;
         y += deltaSpeedY;
         animation.update(container, delta);
@@ -133,6 +142,14 @@ public class Player extends Entity {
     		exp++;
     	}
     }
+    
+    /**
+     * Respawn the player
+     */
+    private void respawn() {
+    	this.x = startx;
+    	this.y = starty;
+    }
 
     /**
 	 * This is called when the MoveUp event occurs
@@ -158,7 +175,7 @@ public class Player extends Entity {
 	@Override
 	public void moveLeft() {
 		img.setRotation(-90f);
-    	deltaSpeedX = -(delta * speed);
+		deltaSpeedX = -(delta * speed);
 	}
 
 	/**
@@ -167,35 +184,9 @@ public class Player extends Entity {
 	@Override
 	public void moveRight() {
 		img.setRotation(90f);
-    	deltaSpeedX = (delta * speed);
+		deltaSpeedX = (delta * speed);
 	}
 
-
-	/*
-	@Override
-	public boolean moveToPoint(float a, float b) {
-		int x = (int)a;
-		int y = (int)b;
-		
-		if((int)this.x < x) {
-			moveRight();
-		} else if((int)this.x > x) {
-			moveLeft();
-		}
-		
-		if((int)this.y < y) {
-			moveDown();
-		} else if((int)this.y > y) {
-			moveUp();
-		}
-		
-		if((int)this.x == x && (int)this.y == y) {
-			return true;
-		}
-		
-		return false;
-	}
-	*/
 	
 	@Override
 	public boolean moveToPoint(float x, float y) {
@@ -218,4 +209,16 @@ public class Player extends Entity {
 
 		return (curX == newX && curY == newY);
 	}
+	
+	@Override
+	public void onCollision(Collidable o) {
+    	if(lives < 1) {
+    		try {
+				GameStateManager.set(GameState.GAMEOVER);
+			} catch (Exception e) {}
+    		return;
+    	}
+		this.lives--;
+    	this.respawn();
+    }
 }
