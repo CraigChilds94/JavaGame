@@ -29,10 +29,12 @@ public class Game extends BasicGame {
     
     public static String VERSION = "0.7";
     public static int baseHealth = 100;
+    public static int level = 0;
     
     public GameStateManager gsm;
     
     public static int WIDTH = 640, HEIGHT = 480;
+	public static int levelCount = 5;
 
     /**
      * @param args the command line arguments

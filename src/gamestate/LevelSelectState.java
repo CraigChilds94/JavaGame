@@ -1,5 +1,9 @@
 package gamestate;
 
+import game.Game;
+import gui.Menu;
+import gui.MenuItem;
+import gui.MenuItemAction;
 import managers.GameStateManager;
 import managers.LevelManager;
 
@@ -18,24 +22,40 @@ public class LevelSelectState extends State {
 	public Pathfinder p;
 	public int width, height;
 	private boolean loaded = false;
+	private Menu menu;
 	
-	public LevelSelectState() {}
+	public LevelSelectState() {
+		Color[] colors = new Color[]{
+    			// Normal
+    			new Color(255, 255, 255),
+    			// Selected
+    			new Color(106,159,235),
+    			// Hover
+    			new Color(157,227,116)
+    	};
+		
+		menu = new Menu();
+		for(int i = 1; i <= Game.levelCount; i++) {
+			
+			final int num = i;
+			menu.addMenuItem(new MenuItem("Level " + i, 100, 100 * i, 100, 100, colors, new MenuItemAction() {
+				public void onAction(MenuItem item) {
+					System.out.println("Hello");
+					Game.level = num;
+				}			
+			}));
+		}
+		
+	}
 	
 	@Override
 	public void update(GameContainer c, float delta) throws SlickException {
-		Input i = c.getInput();
-		if(i.isKeyPressed(i.KEY_SPACE)) {
-			LevelManager.current = 1;
-			try {
-				GameStateManager.set(GameState.PLAYING);
-			} catch (Exception e) {}
-		}
+		menu.update(c, delta);
 	}
 
 	@Override
 	public void render(Graphics g) {
-		g.drawString("Level Select", 100, 100);
-		g.drawString("Press space to play", 100, 170);
+		menu.render(g);
 	}
 
 	@Override

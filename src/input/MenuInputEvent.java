@@ -7,6 +7,8 @@ import managers.GameStateManager;
 
 import org.newdawn.slick.SlickException;
 
+import core.GameState;
+
 
 public class MenuInputEvent extends GameInputEvent {
 	private Menu menu;
@@ -22,7 +24,16 @@ public class MenuInputEvent extends GameInputEvent {
 	public void doActionOnPressed(String key) throws SlickException {
 		if(key.equals("ACTION")) {
 			try {
-				GameStateManager.set(((MenuItem)menu.menuItems.get(menu.selection)).getActionState());
+				MenuItem item = (MenuItem) menu.menuItems.get(menu.selection);
+				if(item.action != null) {
+					item.action.onAction(item);
+					return;
+				}
+				
+				GameState state;
+				if((state = item.getActionState()) != null) {
+					GameStateManager.set(state);
+				}
 			} catch (Exception e) {}
 			return;
 		}

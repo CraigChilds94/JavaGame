@@ -20,8 +20,10 @@ public class MenuItem extends Drawable {
 	private boolean active = false, enabled = true;
 	private Color normal, hover, current, disabled, selected;
 	
+	public MenuItemAction action;
+	
 	/**
-	 * Construct a new menu item
+	 * Construct a new menu item that binds a new game state
 	 * @param value - The text that appears 
 	 * @param x - it's x position
 	 * @param y - it's y position
@@ -39,6 +41,29 @@ public class MenuItem extends Drawable {
 		current = normal;
 		disabled = new Color(170,170,170);
 		this.actionState = actionState;
+		this.action = null;
+	}
+	
+	/**
+	 * Construct a new menu item that has an action
+	 * @param value - The text that appears 
+	 * @param x - it's x position
+	 * @param y - it's y position
+	 * @param width - it's width
+	 * @param height - it's height
+	 * @param colorPallette - The colors that will be used for each state
+	 * @param actionState - What the state becomes when this button is pressed
+	 */
+	public MenuItem(String value, float x, float y, float width, float height, Color[] colorPallette, MenuItemAction action) {
+		super(x, y, width, height);
+		this.value = value;
+		normal = colorPallette[0];
+		selected = colorPallette[1];
+		hover = colorPallette[2];
+		current = normal;
+		disabled = new Color(170,170,170);
+		this.actionState = null;
+		this.action = action;
 	}
 	
 	/**
@@ -74,7 +99,16 @@ public class MenuItem extends Drawable {
 			if(active) {
 				if(input.isMousePressed(0)) {
 					try {
-						GameStateManager.set(getActionState());
+						
+						if(action != null) {
+							action.onAction(this);
+						}
+						
+						GameState actState;
+						if((actState = getActionState()) != null) {
+							GameStateManager.set(actState);
+						}
+						
 					} catch (Exception e) {}
 				}
 				
@@ -121,5 +155,13 @@ public class MenuItem extends Drawable {
 	public MenuItem setDisabled(boolean f) {
 		enabled = !f;
 		return this;
+	}
+	
+	/**
+	 * Attach an action to this item
+	 * @param the action to do
+	 */
+	public void setAction(MenuItemAction mia) {
+		action = mia;
 	}
 }
