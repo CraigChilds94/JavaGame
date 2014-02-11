@@ -75,8 +75,11 @@ public class Player extends Entity {
     	this.c = container;
         
         gil.listen(container.getInput(), new PlayerInputEvent(this));
-        x += deltaSpeedX;
-        y += deltaSpeedY;
+        
+        if(inBounds()) {
+        	x += deltaSpeedX;
+        	y += deltaSpeedY;
+    	}
         animation.update(container, delta);
         gun.update(c, delta);
         
@@ -221,4 +224,9 @@ public class Player extends Entity {
 		this.lives--;
     	this.respawn();
     }
+	
+	@Override
+	public boolean inBounds() {
+		return (x + deltaSpeedX > 0 && x + deltaSpeedX + width < Game.WIDTH) && (y + deltaSpeedY > 0 && y + deltaSpeedY + height < Game.HEIGHT); 
+	}
 }
