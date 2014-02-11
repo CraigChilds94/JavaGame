@@ -7,6 +7,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import core.Collidable;
 import core.Entity;
 import core.GameManager;
 import entities.Player;
@@ -61,7 +62,9 @@ public class Wave extends GameManager {
 		this.p = p;
 		dead = new ArrayList<Entity>();
 		for(Entity e : enemies) {
-			e.listenForCollisions(p.gun.bullets);
+			ArrayList<Collidable> list = (ArrayList<Collidable>) p.gun.bullets.clone();
+			list.add(p);
+			e.listenForCollisions(list);
 			e.update(container, delta);
 			if(!e.alive) {
                 dead.add(e);

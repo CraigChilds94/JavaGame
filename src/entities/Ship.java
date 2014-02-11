@@ -5,6 +5,8 @@ import game.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
+import ammunition.Ammunition;
+import core.Collidable;
 import core.Entity;
 
 /**
@@ -110,4 +112,17 @@ public class Ship extends Entity {
 		
 		return false;
 	}
+	
+	@Override
+	public void onCollision(Collidable o) {
+        if(o instanceof Ammunition) {
+            takeDamage(((Ammunition)o).damage);
+          
+            if(!alive) {
+            	((Ammunition) o).wasKillingHit(this);
+            }
+        }
+        
+        o.onCollision(this);
+    }
 }

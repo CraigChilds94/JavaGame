@@ -1,5 +1,7 @@
 package core;
 
+import game.Game;
+
 import java.util.ArrayList;
 
 import org.newdawn.slick.GameContainer;
@@ -21,15 +23,15 @@ public abstract class Entity extends DrawableImage {
     
     /**
      * Construct a new Entity
-     * @param start_x
-     * @param start_y
+     * @param startx
+     * @param starty
      * @param width
      * @param height
      * @param imgPath
      * @throws SlickException
      */
-    public Entity(float start_x, float start_y, float width, float height, String imgPath) throws SlickException {
-        super(start_x, start_y, width, height, imgPath);
+    public Entity(float startx, float starty, float width, float height, String imgPath) throws SlickException {
+        super(startx, starty, width, height, imgPath);
     }
     
     /**
@@ -44,21 +46,6 @@ public abstract class Entity extends DrawableImage {
         speed *= delta;
         this.setBounds(x, y, width, height);
     }
-       
-    /**
-     * What happens when an entity collides with some ammo?
-     * @param o
-     */
-    public void onCollision(Collidable o) {
-        if(o instanceof Ammunition) {
-            takeDamage(((Ammunition)o).damage);
-            o.onCollision(this);
-            
-            if(!alive) {
-            	((Ammunition) o).wasKillingHit(this);
-            }
-        }
-    }
     
     /**
      * Make the entity take damage
@@ -71,10 +58,19 @@ public abstract class Entity extends DrawableImage {
         }
     }
     
+    /**
+     * Check if the entity is within the bounds of the game screen
+     * @return true if in bounds, false otherwise
+     */
+    public boolean inBounds() {
+    	return (x > 0 && x < Game.WIDTH) && (y > 0 && y < Game.HEIGHT);
+    }
+    
     public abstract void moveUp();
     public abstract void moveDown();
     public abstract void moveLeft();
     public abstract void moveRight();
     public abstract boolean moveToPoint(float x, float y);
+    public abstract void onCollision(Collidable o);
     
 }
